@@ -15,6 +15,23 @@ return {
       },
     },
     config = function()
+      local diagnostics_enabled = false
+      local function toggle_diagnostics()
+        diagnostics_enabled = not diagnostics_enabled
+        if diagnostics_enabled then
+          vim.diagnostic.enable(true)
+          print("Diagnostics: Enabled")
+        else
+          vim.diagnostic.enable(false)
+          print("Diagnostics: Disabled")
+        end
+      end
+
+      -- Disable diagnostics at startup
+      vim.diagnostic.enable(false)
+
+      vim.keymap.set('n', '<leader>d', toggle_diagnostics, { desc = "Toggle Diagnostics" })
+
       require('lspconfig').lua_ls.setup {
         autostart = false,
         diagnostics = {
@@ -24,6 +41,7 @@ return {
       require('lspconfig').jdtls.setup {
         autostart = false,
       }
+      require('lspconfig').pyright.setup {}
     end,
   }
 }
