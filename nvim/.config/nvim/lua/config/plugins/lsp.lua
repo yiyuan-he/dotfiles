@@ -33,7 +33,6 @@ return {
       vim.keymap.set('n', '<leader>d', toggle_diagnostics, { desc = "Toggle Diagnostics" })
 
       require('lspconfig').lua_ls.setup {
-        autostart = false,
         diagnostics = {
           disable = { 'missing-fields' }
         }
