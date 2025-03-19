@@ -9,8 +9,13 @@ vim.keymap.set("v", "<space>x", ":lua<CR>")
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 
+-- Sync clipboard between OS and Neovim.
+-- Schedule the setting after `UiEnter` because it can increase startup-time.
+vim.schedule(function()
+  vim.opt.clipboard = "unnamedplus"
+end)
+
 vim.opt.relativenumber = true
-vim.opt.clipboard = "unnamedplus"
 vim.opt.wrap = false
 vim.opt.termguicolors = true
 
@@ -18,6 +23,50 @@ vim.opt.termguicolors = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
+
+-- Set undodir and enable persistent undo
+vim.opt.undodir = undodir
+vim.opt.undofile = true
+
+-- Enable break indent
+vim.opt.breakindent = true
+
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- Keep signcolumn on by default
+vim.opt.signcolumn = 'yes'
+
+-- Decrease update time
+vim.opt.updatetime = 250
+
+-- Decrease mapped sequence wait time
+vim.opt.timeoutlen = 300
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
+
+-- Minimal number of screen lines to keep above and below the cursor. Keeps things in the middle of the screen.
+vim.opt.scrolloff = 999
+
+-- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- instead raise a dialog asking if you wish to save the current file(s)
+-- See `:help 'confirm'`
+vim.opt.confirm = true
+
+-- Create the undodir if it doesn't exist
+local undodir = vim.fn.stdpath("data") .. "/undodir"
+-- Create directory if it doesn't exist
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir, "p")
+end
 
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -28,32 +77,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Create the undodir if it doesn't exist
-local undodir = vim.fn.stdpath("data") .. "/undodir"
--- Create directory if it doesn't exist
-if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mkdir(undodir, "p")
-end
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Set undodir and enable persistent undo
-vim.opt.undodir = undodir
-vim.opt.undofile = true
-
--- Configure built-in nvim terminal
-vim.api.nvim_create_autocmd('TermOpen', {
-  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
-  callback = function()
-    vim.opt.number =  false
-    vim.opt.relativenumber = false
-  end,
-})
-
-vim.keymap.set("n", "<space>st", function()
-  vim.cmd.vnew()
-  vim.cmd.term()
-  vim.cmd.wincmd("J")
-  vim.api.nvim_win_set_height(0, 15)
-end)
+-- Diagnostic keymaps
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Load nvim plugins
 require("config.lazy")
