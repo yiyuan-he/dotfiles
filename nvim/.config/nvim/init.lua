@@ -15,6 +15,9 @@ vim.schedule(function()
   vim.opt.clipboard = "unnamedplus"
 end)
 
+-- Set cursor to always be block
+vim.opt.guicursor = ""
+
 vim.opt.relativenumber = true
 vim.opt.wrap = false
 vim.opt.termguicolors = true
@@ -28,8 +31,8 @@ vim.opt.expandtab = true
 vim.opt.undodir = undodir
 vim.opt.undofile = true
 
--- Enable break indent
-vim.opt.breakindent = true
+-- Enable smart indent
+vim.opt.smartindent = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -59,6 +62,9 @@ vim.opt.inccommand = 'split'
 
 -- Minimal number of screen lines to keep above and below the cursor. Keeps things in the middle of the screen.
 vim.opt.scrolloff = 999
+
+-- Set color column
+vim.opt.cc = "80"
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
