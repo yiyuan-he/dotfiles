@@ -61,7 +61,7 @@ vim.opt.splitbelow = true
 vim.opt.inccommand = 'split'
 
 -- Minimal number of screen lines to keep above and below the cursor. Keeps things in the middle of the screen.
-vim.opt.scrolloff = 999
+vim.opt.scrolloff = 10
 
 -- Set color column
 vim.opt.cc = "80"
