@@ -16,7 +16,7 @@ require("paq")({
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
-local lsps = { "pyright", "ruff", "lua_ls" }
+local lsps = { "pyright", "lua_ls" }
 for _, lsp in pairs(lsps) do
   local setup = {}
   if lsp == "lua_ls" then
@@ -169,14 +169,6 @@ vim.keymap.set("n", "<leader>fg", ":RG!<cr>")
 -- Set up oil
 require('oil').setup()
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
-
--- Set up conform
-require("conform").setup({
-    formatters_by_ft = {
-        python = { "ruff_organize_imports", "ruff_format" },
-    },
-    format_after_save = {},
-})
 
 require("mini.statusline").setup()
 
