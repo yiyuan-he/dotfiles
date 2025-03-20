@@ -1,3 +1,75 @@
+-- Load package manager
+require("paq")({
+  "savq/paq-nvim",
+  "neovim/nvim-lspconfig",
+  "nvim-treesitter/nvim-treesitter",
+  "stevearc/oil.nvim",
+  "stevearc/conform.nvim",
+  "junegunn/fzf",
+  "junegunn/fzf.vim",
+  "craftzdog/solarized-osaka.nvim",
+  "lewis6991/gitsigns.nvim",
+  "folke/lazydev.nvim",
+  "echasnovski/mini.nvim",
+  "folke/which-key.nvim",
+})
+
+-- Set up LSP
+local lspconfig = require("lspconfig")
+local lsps = { "pyright", "ruff", "lua_ls" }
+for _, lsp in pairs(lsps) do
+  local setup = {}
+  if lsp == "lua_ls" then
+    setup = {}
+  elseif lsp == "pyright" then
+    setup = {}
+  end
+
+  lspconfig[lsp].setup(setup)
+end
+
+-- Configure LazyDev
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    require("lazydev").setup({
+      library = {
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    })
+  end
+})
+
+-- Set up treesitter
+---@diagnostic disable-next-line: missing-fields
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "go", "rust", "python", "cpp" },
+  auto_install = false,
+  sync_install = false,
+  highlight = { enable = true },
+  indent = { enable = true },
+  ---@diagnostic disable-next-line: unused-local
+  disable = function(lang, buf)
+    local max_filesize = 100 * 1024 -- 100KB
+    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+    if ok and stats and stats.size > max_filesize then
+      return true
+    end
+  end,
+  additional_vim_regex_highlighting = false,
+
+})
+
+vim.cmd.colorscheme "solarized-osaka"
+
+-- Create the undodir if it doesn't exist
+local undodir = vim.fn.stdpath("data") .. "/undodir"
+-- Create directory if it doesn't exist
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir, "p")
+end
+
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
@@ -31,7 +103,7 @@ vim.opt.expandtab = true
 vim.opt.undodir = undodir
 vim.opt.undofile = true
 
--- Enable smart indent
+-- Enable smart indent -- indent newlines based on context
 vim.opt.smartindent = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
@@ -77,13 +149,6 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Create the undodir if it doesn't exist
-local undodir = vim.fn.stdpath("data") .. "/undodir"
--- Create directory if it doesn't exist
-if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mkdir(undodir, "p")
-end
-
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking text',
@@ -97,8 +162,46 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- Set up fzf
+vim.keymap.set("n", "<leader>fd", ":Files!<cr>")
+vim.keymap.set("n", "<leader>fg", ":RG!<cr>")
 
--- Load nvim plugins
-require("config.lazy")
+-- Set up oil
+require('oil').setup()
+vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
+
+-- Set up conform
+require("conform").setup({
+    formatters_by_ft = {
+        python = { "ruff_organize_imports", "ruff_format" },
+    },
+    format_after_save = {},
+})
+
+require("mini.statusline").setup()
+
+require("mini.pairs").setup {
+  -- In which modes mappings from this `config` should be created
+  modes = { insert = true, command = false, terminal = false },
+
+  -- Global mappings. Each right hand side should be a pair information, a
+  -- table with at least these fields (see more in |MiniPairs.map|):
+  -- - <action> - one of 'open', 'close', 'closeopen'.
+  -- - <pair> - two character string for pair to be used.
+  -- By default pair is not inserted after `\`, quotes are not recognized by
+  -- `<CR>`, `'` does not insert pair after a letter.
+  -- Only parts of tables can be tweaked (others will use these defaults).
+  mappings = {
+    ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\].' },
+    ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\].' },
+    ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\].' },
+
+    [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+    [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+    ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+
+    ['"'] = false,
+    ["'"] = false,
+    ['`'] = false,
+  },
+}
