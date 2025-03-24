@@ -12,11 +12,19 @@ require("paq")({
   "folke/lazydev.nvim",
   "echasnovski/mini.nvim",
   "folke/which-key.nvim",
+  "navarasu/onedark.nvim",
+  "itchyny/lightline.vim",
 })
+
+-- Set colorscheme
+vim.cmd.colorscheme "onehalfdark"
+vim.g.lightline = {
+  colorscheme = "onehalfdark"
+}
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
-local lsps = { "pyright", "lua_ls" }
+local lsps = { "pyright", "ruff", "lua_ls", "ruby_lsp" }
 for _, lsp in pairs(lsps) do
   local setup = {}
   if lsp == "lua_ls" then
@@ -60,8 +68,6 @@ require("nvim-treesitter.configs").setup({
   additional_vim_regex_highlighting = false,
 
 })
-
-vim.cmd.colorscheme "solarized-osaka"
 
 -- Create the undodir if it doesn't exist
 local undodir = vim.fn.stdpath("data") .. "/undodir"
@@ -169,8 +175,6 @@ vim.keymap.set("n", "<leader>fg", ":RG!<cr>")
 -- Set up oil
 require('oil').setup()
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
-
-require("mini.statusline").setup()
 
 require("mini.pairs").setup {
   -- In which modes mappings from this `config` should be created
