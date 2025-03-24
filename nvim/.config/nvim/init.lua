@@ -12,7 +12,6 @@ require("paq")({
   "folke/lazydev.nvim",
   "echasnovski/mini.nvim",
   "folke/which-key.nvim",
-  "navarasu/onedark.nvim",
   "itchyny/lightline.vim",
 })
 
