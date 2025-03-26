@@ -5,8 +5,6 @@ require("paq")({
   "nvim-treesitter/nvim-treesitter",
   "stevearc/oil.nvim",
   "stevearc/conform.nvim",
-  "junegunn/fzf",
-  "junegunn/fzf.vim",
   "craftzdog/solarized-osaka.nvim",
   "lewis6991/gitsigns.nvim",
   "folke/lazydev.nvim",
@@ -16,6 +14,7 @@ require("paq")({
   { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim" } } },
   "OXY2DEV/markview.nvim",
   { "rose-pine/neovim", as = "rose-pine" },
+  "ibhagwan/fzf-lua",
 })
 
 -- Set colorscheme
@@ -168,8 +167,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Set up fzf
-vim.keymap.set("n", "<leader>fd", ":Files!<cr>")
-vim.keymap.set("n", "<leader>fg", ":RG!<cr>")
+vim.keymap.set("n", "<leader>fd", ":FzfLua files<cr>")
+vim.keymap.set("n", "<leader>fg", ":FzfLua live_grep<cr>")
 
 -- Set up oil
 require('oil').setup()
