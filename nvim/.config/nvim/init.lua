@@ -12,17 +12,14 @@ require("paq")({
   "folke/lazydev.nvim",
   "echasnovski/mini.nvim",
   "folke/which-key.nvim",
-  "itchyny/lightline.vim",
   "nvim-lua/plenary.nvim",
   { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim" } } },
   "OXY2DEV/markview.nvim",
+  { "rose-pine/neovim", as = "rose-pine" },
 })
 
 -- Set colorscheme
-vim.cmd.colorscheme "onehalfdark"
-vim.g.lightline = {
-  colorscheme = "onehalfdark"
-}
+vim.cmd.colorscheme "rose-pine"
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
