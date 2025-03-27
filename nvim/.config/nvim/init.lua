@@ -23,7 +23,7 @@ vim.cmd.colorscheme "onehalfdark"
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
-local lsps = { "pyright", "ruff", "lua_ls", "ruby_lsp" }
+local lsps = { "pyright", "ruff", "lua_ls", "ruby_lsp", "jdtls" }
 for _, lsp in pairs(lsps) do
   local setup = {}
   if lsp == "lua_ls" then
@@ -174,7 +174,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Set up fzf
+-- Set up fzf-lua
+-- Send all results to a quickfix list
+require("fzf-lua").setup({
+  keymap = {
+    fzf = {
+      ["ctrl-q"] = "select-all+accept",
+    },
+  },
+})
 vim.keymap.set("n", "<leader>fd", ":FzfLua files<cr>")
 vim.keymap.set("n", "<leader>fg", ":FzfLua live_grep<cr>")
 
