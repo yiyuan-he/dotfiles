@@ -19,8 +19,7 @@ require("paq")({
   "folke/tokyonight.nvim",
 })
 
--- Set colorscheme
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme "onehalfdark"
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
