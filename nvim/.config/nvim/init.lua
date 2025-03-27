@@ -15,10 +15,12 @@ require("paq")({
   "OXY2DEV/markview.nvim",
   { "rose-pine/neovim", as = "rose-pine" },
   "ibhagwan/fzf-lua",
+  { "catppuccin/nvim", as = "catppuccin" },
+  "folke/tokyonight.nvim",
 })
 
 -- Set colorscheme
-vim.cmd.colorscheme "rose-pine"
+vim.cmd.colorscheme "catppuccin-mocha"
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
@@ -28,7 +30,13 @@ for _, lsp in pairs(lsps) do
   if lsp == "lua_ls" then
     setup = {}
   elseif lsp == "pyright" then
-    setup = {}
+    setup = {
+      autostart = false
+    }
+  elseif lsp == "ruff" then
+    setup = {
+      autostart = false
+    }
   end
 
   lspconfig[lsp].setup(setup)
@@ -38,6 +46,7 @@ end
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   callback = function()
+---@diagnostic disable-next-line: missing-fields
     require("lazydev").setup({
       library = {
         -- Load luvit types when the `vim.uv` word is found
