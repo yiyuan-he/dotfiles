@@ -17,9 +17,10 @@ require("paq")({
   "ibhagwan/fzf-lua",
   { "catppuccin/nvim", as = "catppuccin" },
   "folke/tokyonight.nvim",
+  "navarasu/onedark.nvim",
 })
 
-vim.cmd.colorscheme "onehalfdark"
+vim.cmd.colorscheme "onedark"
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
