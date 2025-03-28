@@ -29,13 +29,9 @@ for _, lsp in pairs(lsps) do
   if lsp == "lua_ls" then
     setup = {}
   elseif lsp == "pyright" then
-    setup = {
-      autostart = false
-    }
+    setup = {}
   elseif lsp == "ruff" then
-    setup = {
-      autostart = false
-    }
+    setup = {}
   end
 
   lspconfig[lsp].setup(setup)
