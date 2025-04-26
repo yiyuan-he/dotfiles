@@ -65,7 +65,7 @@ for _, lsp in pairs(lsps) do
   lspconfig[lsp].setup(setup)
 end
 
-vim.keymap.set("n", "<space>ld", "<cmd>lua vim.diagnostic.open_float()<CR>")
+vim.keymap.set("n", "<space>d", "<cmd>lua vim.diagnostic.open_float()<CR>")
 
 -- Configure LazyDev
 vim.api.nvim_create_autocmd("FileType", {
