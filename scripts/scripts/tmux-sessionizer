@@ -3,7 +3,11 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/projects ~/projects/cp ~/notes ~/worknotes -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find \
+                ~/projects/cs61a \
+                ~/projects/aws-otel-python-instrumentation \
+                -mindepth 0 -maxdepth 0 -type d \
+            | fzf)
 fi
 
 if [[ -z $selected ]]; then
