@@ -22,7 +22,7 @@ require("paq")({
   "rebelot/kanagawa.nvim",
 })
 
-vim.cmd("colorscheme tokyonight")
+vim.cmd("colorscheme magi-tome")
 
 -- Set up LSP
 local lspconfig = require("lspconfig")

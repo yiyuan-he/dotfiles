@@ -1,0 +1,1 @@
+require("magi").load({ style = "tome" })
