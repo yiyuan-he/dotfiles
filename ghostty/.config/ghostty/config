@@ -1,6 +1,4 @@
 mouse-hide-while-typing = true
 scrollback-limit = 1000000
 
-keybind = ctrl+a>v=write_scrollback_file:open
-
 window-save-state = always
