@@ -12,8 +12,6 @@ require("paq")({
   "folke/which-key.nvim",
   "nvim-lua/plenary.nvim",
   { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim" } } },
-  "OXY2DEV/markview.nvim",
-  { "rose-pine/neovim", as = "rose-pine" },
   "ibhagwan/fzf-lua",
   { "catppuccin/nvim", as = "catppuccin" },
   "folke/tokyonight.nvim",
