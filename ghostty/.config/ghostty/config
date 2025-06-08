@@ -1,3 +1,4 @@
+theme = "roseprime"
 mouse-hide-while-typing = true
 scrollback-limit = 1000000
 

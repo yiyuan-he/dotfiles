@@ -1,0 +1,32 @@
+# Normal colors (0-7)
+palette = 0=#666a82
+palette = 1=#ba5f60
+palette = 2=#647977
+palette = 3=#c4959c
+palette = 4=#6172A0
+palette = 5=#6C6B9B
+palette = 6=#436285
+palette = 7=#6F6F83
+
+# Bright colors (8-15)
+palette = 8=#666a82
+palette = 9=#ad82a2
+palette = 10=#9bbdb8
+palette = 11=#d2af98
+palette = 12=#95b1fc
+palette = 13=#a8a6f5
+palette = 14=#6397cf
+palette = 15=#adadcc
+
+# Indexed colors from original config
+palette = 16=#111111
+palette = 17=#a8a6f5
+
+# Primary colors
+background = #121315
+foreground = #adadcc
+cursor-color = #adadcc
+
+# Selection colors (using theme-appropriate colors)
+selection-background = #6C6B9B
+selection-foreground = #adadcc
