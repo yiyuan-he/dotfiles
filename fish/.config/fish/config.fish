@@ -15,66 +15,54 @@ set -gx PATH /nix/var/nix/profiles/default/bin /nix/var/nix/profiles/default/sbi
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
-# Ghostty Default Color Palette
-set -l foreground ffffff
-set -l background 282c34
-set -l selection 666666
-set -l comment 666666
-set -l red cc6666
-set -l orange e7c547
-set -l yellow f0c674
-set -l green b5bd68
-set -l purple b294bb
-set -l cyan 8abeb7
-set -l pink c397d8
+set -g alt a8a6f5 
+set -g constant 95b1fc 
+set -g comment 666a82 
+set -g fg adadcc 
+set -g func c4959c 
+set -g keyword 6397cf 
+set -g number cfa18c 
+set -g operator 838196 
+set -g property ad82a2 
+set -g str d2af98 
+set -g type 9bbdb8 
 
 # Syntax Highlighting Colors
-set -g fish_color_normal $foreground
-set -g fish_color_command $cyan
-set -g fish_color_keyword $pink
-set -g fish_color_quote $yellow
-set -g fish_color_redirection $foreground
-set -g fish_color_end $orange
-set -g fish_color_option $pink
-set -g fish_color_error $red
-set -g fish_color_param $purple
-set -g fish_color_comment $comment
-set -g fish_color_selection --background=$selection
-set -g fish_color_search_match --background=$selection
-set -g fish_color_operator $green
-set -g fish_color_escape $pink
-set -g fish_color_autosuggestion $comment
+set -g fish_color_normal adadcc
+set -g fish_color_command c4959c
+set -g fish_color_keyword 6397cf
+set -g fish_color_quote d2af98
+set -g fish_color_redirection 95b1fc
+set -g fish_color_end 838196
+set -g fish_color_error ba5f60
+set -g fish_color_param adadcc
+set -g fish_color_valid_path 9bbdb8
+set -g fish_color_option a8a6f5
+set -g fish_color_comment 666a82
+set -g fish_color_selection --background=16171b
+set -g fish_color_operator 838196
+set -g fish_color_escape 6397cf
+set -g fish_color_autosuggestion 666a82
+set -g fish_color_cwd d2af98
+set -g fish_color_hostname cfa18c
+set -g fish_color_status ba5f60
+set -g fish_color_cancel cfa18c
+set -g fish_color_search_match --background=16171b
 
 # Completion Pager Colors
-set -g fish_pager_color_progress $comment
-set -g fish_pager_color_prefix $cyan
-set -g fish_pager_color_completion $foreground
-set -g fish_pager_color_description $comment
-set -g fish_pager_color_selected_background --background=$selection
+set -g fish_pager_color_progress a8a6f5
+set -g fish_pager_color_prefix 9bbdb8
+set -g fish_pager_color_completion adadcc
+set -g fish_pager_color_description 666a82
+set -g fish_pager_color_selected_prefix a8a6f5
+set -g fish_pager_color_selected_completion a8a6f5
+set -g fish_pager_color_selected_background --background=16171b
 
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --highlight-line \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --border=none \
-  --color=bg+:#666666 \
-  --color=bg:#282c34 \
-  --color=border:#8abeb7 \
-  --color=fg:#ffffff \
-  --color=gutter:#282c34 \
-  --color=header:#e7c547 \
-  --color=hl+:#81a2be \
-  --color=hl:#81a2be \
-  --color=info:#666666 \
-  --color=marker:#cc6666 \
-  --color=pointer:#cc6666 \
-  --color=prompt:#81a2be \
-  --color=query:#ffffff:regular \
-  --color=scrollbar:#8abeb7 \
-  --color=separator:#e7c547 \
-  --color=spinner:#cc6666 \
-"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+--color=fg:#666a82,bg:#121315,hl:#9bbdb8,gutter:#121315
+--color=fg+:#ad82a2,bg+:#16171b,hl+:#9bbdb8
+--color=info:#a8a6f5,prompt:#9bbdb8,pointer:#ad82a2
+--color=marker:#6397cf,spinner:#6397cf,header:#6397cf"
 
 starship init fish | source
 zoxide init fish | source

@@ -18,9 +18,13 @@ require("paq")({
   "navarasu/onedark.nvim",
   "folke/zen-mode.nvim",
   "rebelot/kanagawa.nvim",
+  "cdmill/neomodern.nvim",
 })
 
-vim.cmd("colorscheme magi-tome")
+require("neomodern").setup({
+  theme = "roseprime"
+})
+require("neomodern").load()
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
