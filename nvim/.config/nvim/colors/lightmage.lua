@@ -1,0 +1,1 @@
+require("mage").load({ style = "light" })
