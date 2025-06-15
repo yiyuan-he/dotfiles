@@ -1,0 +1,79 @@
+/* Wofi Dark Theme */
+
+window {
+    margin: 0px;
+    border: 2px solid #4c7899;
+    background-color: #1e1e2e;
+    border-radius: 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+}
+
+#input {
+    margin: 8px;
+    padding: 12px;
+    color: #cdd6f4;
+    background-color: #313244;
+    border: 2px solid #585b70;
+    border-radius: 6px;
+    outline: none;
+}
+
+#input:focus {
+    border-color: #89b4fa;
+}
+
+#inner-box {
+    margin: 8px;
+    border: none;
+    background-color: transparent;
+}
+
+#outer-box {
+    margin: 8px;
+    border: none;
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0px;
+    border: none;
+}
+
+#text {
+    margin: 8px;
+    border: none;
+    color: #cdd6f4;
+    font-weight: normal;
+}
+
+#entry {
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 2px;
+}
+
+#entry:selected {
+    background-color: #45475a;
+    color: #89b4fa;
+    border: 1px solid #89b4fa;
+}
+
+#entry:hover {
+    background-color: #313244;
+}
+
+/* Style for entries that match the search */
+#entry:nth-child(odd) {
+    background-color: transparent;
+}
+
+#entry:nth-child(even) {
+    background-color: rgba(49, 50, 68, 0.3);
+}
+
+/* No results text */
+#text:disabled {
+    color: #6c7086;
+}
