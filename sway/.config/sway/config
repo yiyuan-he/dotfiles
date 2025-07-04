@@ -16,7 +16,7 @@ set $right l
 # Your preferred terminal emulator
 set $term ghostty
 # Your preferred application launcher
-set $menu wofi --show=drun --lines=5 --promp=""
+set $menu wofi --show=drun --lines=5 --prompt=""
 # Set scaling factors for external monitors
 output DP-1 resolution 2560x1600 position 0,0 scale 1.5
 
