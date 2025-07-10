@@ -21,10 +21,8 @@ require("paq")({
   "cdmill/neomodern.nvim",
 })
 
-require("neomodern").setup({
-  theme = "roseprime"
-})
-require("neomodern").load()
+vim.o.background = "light"
+vim.cmd("colorscheme sunmage")
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
