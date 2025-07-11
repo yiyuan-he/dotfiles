@@ -66,7 +66,7 @@ require("nvim-treesitter.configs").setup({
   auto_install = false,
   sync_install = false,
   highlight = { enable = true },
-  indent = { enable = true },
+  indent = { enable = true, disable = {"ocaml"} },
   ---@diagnostic disable-next-line: unused-local
   disable = function(lang, buf)
     local max_filesize = 100 * 1024 -- 100KB
