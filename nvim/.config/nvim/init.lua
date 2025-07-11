@@ -59,7 +59,10 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Set up treesitter
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "go", "rust", "python", "cpp" },
+  ensure_installed = {
+    "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html",
+    "go", "rust", "python", "cpp", "ocaml", "markdown", "markdown_inline",
+  },
   auto_install = false,
   sync_install = false,
   highlight = { enable = true },
