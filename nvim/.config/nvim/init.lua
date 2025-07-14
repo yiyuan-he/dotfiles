@@ -186,6 +186,12 @@ require("fzf-lua").setup({
       ["ctrl-q"] = "select-all+accept",
     },
   },
+  grep = {
+    hidden = false
+  },
+  files = {
+    hidden = false
+  }
 })
 vim.keymap.set("n", "<leader>fd", ":FzfLua files<cr>")
 vim.keymap.set("n", "<leader>fg", ":FzfLua live_grep<cr>")
