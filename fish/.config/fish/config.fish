@@ -62,10 +62,10 @@ set -g fish_pager_color_selected_completion 65476f
 set -g fish_pager_color_selected_background --background=ede7dc
 
 # FZF Light Theme Colors - Matching Sun Mage palette
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
---color=fg:#2a2a2a,bg:#faf8f3,hl:#5485b6,gutter:#faf8f3
---color=fg+:#1a1a1a,bg+:#ede7dc,hl+:#6d8b42
---color=info:#7a9ec2,prompt:#5485b6,pointer:#9e83a8
+set -x FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS \
+--color=fg:#2a2a2a,bg:#faf8f3,hl:#5485b6,gutter:#faf8f3 \
+--color=fg+:#1a1a1a,bg+:#ede7dc,hl+:#6d8b42 \
+--color=info:#7a9ec2,prompt:#5485b6,pointer:#9e83a8 \
 --color=marker:#5485b6,spinner:#5485b6,header:#5485b6"
 
 starship init fish | source
