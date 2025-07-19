@@ -26,14 +26,10 @@ vim.cmd("colorscheme sunmage")
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
-local lsps = { "pyright", "ruff", "lua_ls", "ruby_lsp", "jdtls" }
+local lsps = { "lua_ls", "pyright" }
 for _, lsp in pairs(lsps) do
   local setup = {}
   if lsp == "lua_ls" then
-    setup = {}
-  elseif lsp == "pyright" then
-    setup = {}
-  elseif lsp == "ruff" then
     setup = {}
   end
 
@@ -191,6 +187,10 @@ require("fzf-lua").setup({
   },
   files = {
     hidden = false
+  },
+  -- Make the search query text darker for better visibility with sunmage
+  fzf_colors = {
+    ["query"] = { "fg", "Normal" },  -- Use Normal fg color which is #4a4a4a in sunmage
   }
 })
 vim.keymap.set("n", "<leader>fd", ":FzfLua files<cr>")
