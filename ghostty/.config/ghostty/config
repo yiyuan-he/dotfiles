@@ -1,5 +1,4 @@
 theme = "sun-mage"
-font-family = "CaskaydiaCove Nerd Font Mono"
 mouse-hide-while-typing = true
 scrollback-limit = 1000000
 
