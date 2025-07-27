@@ -202,8 +202,8 @@ require("fzf-lua").setup({
 })
 vim.keymap.set("n", "<leader>fd", ":FzfLua files<cr>")
 vim.keymap.set("n", "<leader>fg", ":FzfLua live_grep<cr>")
-vim.keymap.set("n", "<leader>ff", ":FzfLua lsp_live_workspace_symbols<cr>")
-
+vim.keymap.set("n", "<leader>fs", ":FzfLua lsp_live_workspace_symbols<cr>")
+vim.keymap.set("n", "<leader>fm", ":FzfLua marks<cr>")
 
 -- Set up oil
 require('oil').setup()
