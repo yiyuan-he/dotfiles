@@ -26,11 +26,17 @@ vim.cmd("colorscheme catppuccin-latte")
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
-local lsps = { "lua_ls" }
+local lsps = { "lua_ls", "pyright" }
 for _, lsp in pairs(lsps) do
   local setup = {}
   if lsp == "lua_ls" then
     setup = {}
+  elseif lsp == "pyright" then
+    setup = {
+      handlers = {
+        ["textDocument/publishDiagnostics"] = function() end
+      }
+    }
   end
 
   lspconfig[lsp].setup(setup)
@@ -196,6 +202,8 @@ require("fzf-lua").setup({
 })
 vim.keymap.set("n", "<leader>fd", ":FzfLua files<cr>")
 vim.keymap.set("n", "<leader>fg", ":FzfLua live_grep<cr>")
+vim.keymap.set("n", "<leader>ff", ":FzfLua lsp_live_workspace_symbols<cr>")
+
 
 -- Set up oil
 require('oil').setup()
