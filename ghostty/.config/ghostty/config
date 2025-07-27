@@ -1,5 +1,2 @@
-theme = "sun-mage"
-mouse-hide-while-typing = true
-scrollback-limit = 1000000
-
-window-save-state = always
+theme = "catppuccin-latte"
+font-family = "CaskaydiaMono Nerd Font"
