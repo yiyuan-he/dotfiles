@@ -22,11 +22,11 @@ require("paq")({
 })
 
 vim.o.background = "light"
-vim.cmd("colorscheme sunmage")
+vim.cmd("colorscheme catppuccin-latte")
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
-local lsps = { "lua_ls", "pyright" }
+local lsps = { "lua_ls" }
 for _, lsp in pairs(lsps) do
   local setup = {}
   if lsp == "lua_ls" then
@@ -58,6 +58,7 @@ require("nvim-treesitter.configs").setup({
   ensure_installed = {
     "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html",
     "go", "rust", "python", "cpp", "ocaml", "markdown", "markdown_inline",
+    "ninja", "rst",
   },
   auto_install = false,
   sync_install = false,
@@ -244,3 +245,10 @@ vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+
+-- Set up indent scope
+require("mini.indentscope").setup({
+  symbol = "│",
+  options = { try_as_border = true }
+})
