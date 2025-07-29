@@ -1,0 +1,28 @@
+# emacs keybinds in zsh
+bindkey -e
+
+# need to explicity enable editor functionality in zsh
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+alias vim=nvim
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias claude="/Users/yiyuanh/.claude/local/claude"
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#CCD0DA,bg:#EFF1F5,spinner:#DC8A78,hl:#D20F39 \
+--color=fg:#4C4F69,header:#D20F39,info:#8839EF,pointer:#DC8A78 \
+--color=marker:#7287FD,fg+:#4C4F69,prompt:#8839EF,hl+:#D20F39 \
+--color=selected-bg:#BCC0CC \
+--color=border:#CCD0DA,label:#4C4F69"
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+eval "$(starship init zsh)"
+eval "$(/Users/yiyuanh/.local/bin/mise activate zsh)"
+eval "$(zoxide init bash)"
