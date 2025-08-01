@@ -122,9 +122,6 @@ vim.opt.expandtab = true
 vim.opt.undodir = undodir
 vim.opt.undofile = true
 
--- Enable smart indent -- indent newlines based on context
-vim.opt.smartindent = true
-
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
