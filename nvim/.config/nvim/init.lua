@@ -26,7 +26,7 @@ vim.cmd("colorscheme catppuccin-latte")
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
-local lsps = { "lua_ls", "pyright" }
+local lsps = { "lua_ls", "pyright", "ts_ls" }
 for _, lsp in pairs(lsps) do
   local setup = {}
   if lsp == "lua_ls" then
