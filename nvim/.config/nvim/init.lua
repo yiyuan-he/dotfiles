@@ -13,6 +13,7 @@ require("paq")({
   "ibhagwan/fzf-lua",
   { "catppuccin/nvim", as = "catppuccin" },
   "folke/trouble.nvim",
+  "mrjones2014/smart-splits.nvim",
 })
 
 vim.o.background = "light"
@@ -158,12 +159,6 @@ vim.opt.cc = "80"
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking text',
@@ -258,3 +253,12 @@ vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc 
 vim.keymap.set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
 vim.keymap.set("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
 vim.keymap.set("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references / ... (Trouble)" })
+
+-- Set up smart-splits
+require('smart-splits').setup({})
+
+-- Smart-splits keymaps with C-a prefix
+vim.keymap.set('n', '<C-a>h', require('smart-splits').move_cursor_left)
+vim.keymap.set('n', '<C-a>j', require('smart-splits').move_cursor_down)
+vim.keymap.set('n', '<C-a>k', require('smart-splits').move_cursor_up)
+vim.keymap.set('n', '<C-a>l', require('smart-splits').move_cursor_right)
