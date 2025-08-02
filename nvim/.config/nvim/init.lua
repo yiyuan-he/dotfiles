@@ -4,8 +4,6 @@ require("paq")({
   "neovim/nvim-lspconfig",
   "nvim-treesitter/nvim-treesitter",
   "stevearc/oil.nvim",
-  "stevearc/conform.nvim",
-  "craftzdog/solarized-osaka.nvim",
   "lewis6991/gitsigns.nvim",
   "folke/lazydev.nvim",
   "echasnovski/mini.nvim",
@@ -14,11 +12,6 @@ require("paq")({
   { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim" } } },
   "ibhagwan/fzf-lua",
   { "catppuccin/nvim", as = "catppuccin" },
-  "folke/tokyonight.nvim",
-  "navarasu/onedark.nvim",
-  "folke/zen-mode.nvim",
-  "rebelot/kanagawa.nvim",
-  "cdmill/neomodern.nvim",
 })
 
 vim.o.background = "light"
