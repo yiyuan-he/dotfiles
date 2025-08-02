@@ -39,6 +39,11 @@ for _, lsp in pairs(lsps) do
     }
   end
 
+  -- Use the current directory as the workspace
+  setup.root_dir = function()
+    return vim.fn.getcwd()
+  end
+  
   lspconfig[lsp].setup(setup)
 end
 
