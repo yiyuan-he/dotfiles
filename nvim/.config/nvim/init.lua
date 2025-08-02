@@ -12,6 +12,7 @@ require("paq")({
   { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim" } } },
   "ibhagwan/fzf-lua",
   { "catppuccin/nvim", as = "catppuccin" },
+  "folke/trouble.nvim",
 })
 
 vim.o.background = "light"
@@ -26,9 +27,9 @@ for _, lsp in pairs(lsps) do
     setup = {}
   elseif lsp == "pyright" then
     setup = {
-      handlers = {
-        ["textDocument/publishDiagnostics"] = function() end
-      }
+      -- handlers = {
+      --   ["textDocument/publishDiagnostics"] = function() end
+      -- }
     }
   end
 
@@ -242,3 +243,20 @@ require("mini.indentscope").setup({
   symbol = "│",
   options = { try_as_border = true }
 })
+
+-- Set up Trouble
+require("trouble").setup({
+  -- Add any custom options here if needed
+  win = {
+    size = { width = 0.3, height = 0.4 }, -- 30% width, 40% height of screen
+    position = "right", -- or "left", "top", "bottom"
+  },
+})
+
+-- Set up Trouble keymaps
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+vim.keymap.set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
+vim.keymap.set("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
+vim.keymap.set("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references / ... (Trouble)" })
+vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
+vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
