@@ -241,13 +241,12 @@ require("mini.indentscope").setup({
 })
 
 -- Set up Trouble
-require("trouble").setup({
-  -- Add any custom options here if needed
-  win = {
-    size = { width = 0.3, height = 0.4 }, -- 30% width, 40% height of screen
-    position = "right", -- or "left", "top", "bottom"
-  },
-})
+require("trouble").setup({})
+
+-- Integrate Trouble with fzf-lua
+local config = require("fzf-lua.config")
+local actions = require("trouble.sources.fzf").actions
+config.defaults.actions.files["ctrl-t"] = actions.open
 
 -- Set up Trouble keymaps
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
