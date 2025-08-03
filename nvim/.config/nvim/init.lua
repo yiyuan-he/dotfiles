@@ -14,10 +14,11 @@ require("paq")({
   { "catppuccin/nvim", as = "catppuccin" },
   "folke/trouble.nvim",
   "mrjones2014/smart-splits.nvim",
+  "folke/tokyonight.nvim"
 })
 
-vim.o.background = "light"
-vim.cmd("colorscheme catppuccin-latte")
+vim.o.background = "dark"
+vim.cmd("colorscheme tokyonight-night")
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
