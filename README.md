@@ -1,6 +1,6 @@
 # Set up:
 Config files for my personal development environment. It's designed to quickly set
-up on any Unix/Linux machine. I use a mixture of Arch Linux, Ubuntu, and MacOs and
+up on any Unix/Linux machine. I use a mixture of Arch Linux, Ubuntu, and MacOS and
 this environment generally behaves consistently across all OSes.
 
 ## Make sure the following are installed:
