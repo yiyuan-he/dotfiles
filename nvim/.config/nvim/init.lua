@@ -163,9 +163,12 @@ require("lazy").setup({
   -- File Navigation
   {
     "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
     cmd = "Oil",
     keys = { { "-", "<cmd>Oil<CR>", desc = "Open parent directory" } },
-    opts = {},
+    lazy = false,
   },
 
   {
