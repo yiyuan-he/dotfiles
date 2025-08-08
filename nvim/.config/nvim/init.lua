@@ -154,10 +154,14 @@ require("lazy").setup({
 
   -- Completion
   {
-    "saghen/blink.cmp",
-    version = "1.*",
-    event = "InsertEnter",
+    'saghen/blink.cmp',
+
+    version = '1.*',
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
     opts = {},
+    opts_extend = { "sources.default" }
   },
 
   -- File Navigation
