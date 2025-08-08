@@ -1,6 +1,22 @@
--- Load package manager
-require("paq")({
-  "savq/paq-nvim",
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Setup lazy.nvim
+require("lazy").setup({
   "neovim/nvim-lspconfig",
   "nvim-treesitter/nvim-treesitter",
   "stevearc/oil.nvim",
@@ -9,12 +25,13 @@ require("paq")({
   "echasnovski/mini.nvim",
   "folke/which-key.nvim",
   "nvim-lua/plenary.nvim",
-  { "ThePrimeagen/harpoon", branch = "harpoon2", requires = { {"nvim-lua/plenary.nvim" } } },
+  { "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
   "ibhagwan/fzf-lua",
-  { "catppuccin/nvim", as = "catppuccin" },
+  { "catppuccin/nvim", name = "catppuccin" },
   "folke/trouble.nvim",
   "mrjones2014/smart-splits.nvim",
-  "folke/tokyonight.nvim"
+  "folke/tokyonight.nvim",
+  { "saghen/blink.cmp", version = "1.*"}
 })
 
 vim.o.background = "dark"
@@ -22,17 +39,13 @@ vim.cmd("colorscheme tokyonight-night")
 
 -- Set up LSP
 local lspconfig = require("lspconfig")
-local lsps = { "lua_ls", "pyright", "ts_ls" }
+local lsps = { "lua_ls", "pyright", "ruff", "ts_ls" }
 for _, lsp in pairs(lsps) do
   local setup = {}
   if lsp == "lua_ls" then
     setup = {}
   elseif lsp == "pyright" then
-    setup = {
-      -- handlers = {
-      --   ["textDocument/publishDiagnostics"] = function() end
-      -- }
-    }
+    setup = {}
   end
 
   -- Use the current directory as the workspace
@@ -262,3 +275,6 @@ vim.keymap.set('n', '<C-a>h', require('smart-splits').move_cursor_left)
 vim.keymap.set('n', '<C-a>j', require('smart-splits').move_cursor_down)
 vim.keymap.set('n', '<C-a>k', require('smart-splits').move_cursor_up)
 vim.keymap.set('n', '<C-a>l', require('smart-splits').move_cursor_right)
+
+-- Set up blink
+require("blink.cmp").setup({})
