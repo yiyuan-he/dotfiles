@@ -1,4 +1,65 @@
+-- ============================================================================
+-- Neovim Configuration
+-- ============================================================================
+
+-- ============================================================================
+-- Leader Keys
+-- ============================================================================
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- ============================================================================
+-- Options
+-- ============================================================================
+-- UI
+vim.o.background = "dark"
+vim.opt.termguicolors = true
+vim.opt.guicursor = "" -- Always block cursor
+vim.opt.relativenumber = true
+vim.opt.wrap = false
+vim.opt.signcolumn = 'yes'
+vim.opt.cc = "80" -- Color column
+vim.opt.confirm = true -- Ask to save on quit
+vim.opt.scrolloff = 10 -- Keep cursor centered
+
+-- Indentation
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.inccommand = 'split' -- Preview substitutions
+
+-- Splits
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Timing
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+
+-- Whitespace display
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Persistent undo
+local undodir = vim.fn.stdpath("data") .. "/undodir"
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir, "p")
+end
+vim.opt.undodir = undodir
+vim.opt.undofile = true
+
+-- Clipboard (delayed for performance)
+vim.schedule(function()
+  vim.opt.clipboard = "unnamedplus"
+end)
+
+-- ============================================================================
 -- Bootstrap lazy.nvim
+-- ============================================================================
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -15,266 +76,236 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setup lazy.nvim
+-- ============================================================================
+-- Plugin Specifications
+-- ============================================================================
 require("lazy").setup({
-  "neovim/nvim-lspconfig",
-  "nvim-treesitter/nvim-treesitter",
-  "stevearc/oil.nvim",
-  "lewis6991/gitsigns.nvim",
-  "folke/lazydev.nvim",
-  "echasnovski/mini.nvim",
-  "folke/which-key.nvim",
-  "nvim-lua/plenary.nvim",
-  { "ThePrimeagen/harpoon", branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
-  "ibhagwan/fzf-lua",
-  { "catppuccin/nvim", name = "catppuccin" },
-  "folke/trouble.nvim",
-  "mrjones2014/smart-splits.nvim",
-  "folke/tokyonight.nvim",
-  { "saghen/blink.cmp", version = "1.*"}
-})
+  -- Colorschemes
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme tokyonight-night")
+    end,
+  },
+  { "catppuccin/nvim", name = "catppuccin", lazy = true },
 
-vim.o.background = "dark"
-vim.cmd("colorscheme tokyonight-night")
+  -- LSP & Development
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "folke/lazydev.nvim",
+    },
+    config = function()
+      -- LSP setup
+      local lspconfig = require("lspconfig")
+      local lsps = { "lua_ls", "pyright", "ruff", "ts_ls" }
 
--- Set up LSP
-local lspconfig = require("lspconfig")
-local lsps = { "lua_ls", "pyright", "ruff", "ts_ls" }
-for _, lsp in pairs(lsps) do
-  local setup = {}
-  if lsp == "lua_ls" then
-    setup = {}
-  elseif lsp == "pyright" then
-    setup = {}
-  end
+      for _, lsp in pairs(lsps) do
+        local setup = {
+          root_dir = function() return vim.fn.getcwd() end
+        }
+        lspconfig[lsp].setup(setup)
+      end
+    end,
+  },
 
-  -- Use the current directory as the workspace
-  setup.root_dir = function()
-    return vim.fn.getcwd()
-  end
-  
-  lspconfig[lsp].setup(setup)
-end
-
-vim.keymap.set("n", "<space>d", "<cmd>lua vim.diagnostic.open_float()<CR>")
-
--- Configure LazyDev
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
-  callback = function()
----@diagnostic disable-next-line: missing-fields
-    require("lazydev").setup({
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
       library = {
-        -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
-    })
-  end
-})
-
--- Set up treesitter
----@diagnostic disable-next-line: missing-fields
-require("nvim-treesitter.configs").setup({
-  ensure_installed = {
-    "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html",
-    "go", "rust", "python", "cpp", "ocaml", "markdown", "markdown_inline",
-    "ninja", "rst",
+    },
   },
-  auto_install = false,
-  sync_install = false,
-  highlight = { enable = true },
-  indent = { enable = true, disable = {"ocaml"} },
-  ---@diagnostic disable-next-line: unused-local
-  disable = function(lang, buf)
-    local max_filesize = 100 * 1024 -- 100KB
-    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-    if ok and stats and stats.size > max_filesize then
-      return true
-    end
-  end,
-  additional_vim_regex_highlighting = false,
 
+  -- Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", 
+          "javascript", "html", "go", "rust", "python", "cpp", 
+          "ocaml", "markdown", "markdown_inline", "ninja", "rst",
+        },
+        auto_install = false,
+        sync_install = false,
+        highlight = { enable = true },
+        indent = { enable = true, disable = {"ocaml"} },
+        ---@diagnostic disable-next-line: unused-local
+        disable = function(lang, buf)
+          local max_filesize = 100 * 1024 -- 100KB
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          if ok and stats and stats.size > max_filesize then
+            return true
+          end
+        end,
+        additional_vim_regex_highlighting = false,
+      })
+    end,
+  },
+
+  -- Completion
+  {
+    "saghen/blink.cmp",
+    version = "1.*",
+    event = "InsertEnter",
+    opts = {},
+  },
+
+  -- File Navigation
+  {
+    "stevearc/oil.nvim",
+    cmd = "Oil",
+    keys = { { "-", "<cmd>Oil<CR>", desc = "Open parent directory" } },
+    opts = {},
+  },
+
+  {
+    "ibhagwan/fzf-lua",
+    cmd = "FzfLua",
+    keys = {
+      { "<leader>fd", ":FzfLua files<cr>", desc = "Find files" },
+      { "<leader>fg", ":FzfLua live_grep<cr>", desc = "Live grep" },
+      { "<leader>fs", ":FzfLua lsp_live_workspace_symbols<cr>", desc = "Workspace symbols" },
+      { "<leader>fm", ":FzfLua marks<cr>", desc = "Marks" },
+    },
+    config = function()
+      require("fzf-lua").setup({
+        keymap = {
+          fzf = {
+            ["ctrl-q"] = "select-all+accept",
+          },
+        },
+        grep = { hidden = false },
+        files = { hidden = false },
+        fzf_colors = {
+          ["query"] = { "fg", "Normal" },
+        }
+      })
+
+      -- Integrate with Trouble
+      local config = require("fzf-lua.config")
+      local actions = require("trouble.sources.fzf").actions
+      config.defaults.actions.files["ctrl-t"] = actions.open
+    end,
+  },
+
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>a", function() require("harpoon"):list():add() end, desc = "Add to Harpoon" },
+      { "<C-e>", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "Harpoon menu" },
+      { "<leader>1", function() require("harpoon"):list():select(1) end, desc = "Harpoon 1" },
+      { "<leader>2", function() require("harpoon"):list():select(2) end, desc = "Harpoon 2" },
+      { "<leader>3", function() require("harpoon"):list():select(3) end, desc = "Harpoon 3" },
+      { "<leader>4", function() require("harpoon"):list():select(4) end, desc = "Harpoon 4" },
+      { "<C-S-P>", function() require("harpoon"):list():prev() end, desc = "Harpoon prev" },
+      { "<C-S-N>", function() require("harpoon"):list():next() end, desc = "Harpoon next" },
+    },
+    config = function()
+      require("harpoon"):setup()
+    end,
+  },
+
+  -- Git
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+  },
+
+  -- UI Enhancements
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
+      { "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP (Trouble)" },
+    },
+    opts = {},
+  },
+
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  -- Window Management
+  {
+    "mrjones2014/smart-splits.nvim",
+    lazy = false,
+    keys = {
+      { "<C-a>h", function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" },
+      { "<C-a>j", function() require("smart-splits").move_cursor_down() end, desc = "Move to bottom split" },
+      { "<C-a>k", function() require("smart-splits").move_cursor_up() end, desc = "Move to top split" },
+      { "<C-a>l", function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" },
+    },
+    opts = {},
+  },
+
+  -- Mini.nvim modules
+  {
+    "echasnovski/mini.nvim",
+    version = false,
+    config = function()
+      -- Auto-pairs
+      require("mini.pairs").setup({
+        modes = { insert = true, command = true, terminal = false },
+        skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+        skip_ts = { "string" },
+        skip_unbalanced = true,
+        markdown = true,
+      })
+
+      -- Indent scope
+      require("mini.indentscope").setup({
+        symbol = "│",
+        options = { try_as_border = true }
+      })
+    end,
+  },
+
+  -- Dependencies
+  { "nvim-lua/plenary.nvim", lazy = true },
 })
 
--- Create the undodir if it doesn't exist
-local undodir = vim.fn.stdpath("data") .. "/undodir"
--- Create directory if it doesn't exist
-if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mkdir(undodir, "p")
-end
+-- ============================================================================
+-- Keymaps
+-- ============================================================================
+-- Basic mappings
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "Source current file" })
+vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "Execute current line" })
+vim.keymap.set("v", "<space>x", ":lua<CR>", { desc = "Execute selection" })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
-vim.keymap.set("n", "<space>x", ":.lua<CR>")
-vim.keymap.set("v", "<space>x", ":lua<CR>")
-vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
-vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
+-- Quickfix navigation
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Next quickfix" })
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix" })
 
--- Sync clipboard between OS and Neovim.
--- Schedule the setting after `UiEnter` because it can increase startup-time.
-vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"
-end)
+-- LSP
+vim.keymap.set("n", "<space>d", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Show diagnostics" })
 
--- Set cursor to always be block
-vim.opt.guicursor = ""
-
-vim.opt.relativenumber = true
-vim.opt.wrap = false
-vim.opt.termguicolors = true
-
--- Use 4 spaces for each indentation
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.expandtab = true
-
--- Set undodir and enable persistent undo
-vim.opt.undodir = undodir
-vim.opt.undofile = true
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
-
--- Decrease update time
-vim.opt.updatetime = 250
-
--- Decrease mapped sequence wait time
-vim.opt.timeoutlen = 300
-
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
--- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
--- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
-
--- Minimal number of screen lines to keep above and below the cursor. Keeps things in the middle of the screen.
-vim.opt.scrolloff = 10
-
--- Set color column
-vim.opt.cc = "80"
-
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
--- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
-vim.opt.confirm = true
-
--- Highlight when yanking text
+-- ============================================================================
+-- Autocommands
+-- ============================================================================
+-- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
 })
-
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Set up fzf-lua
--- Send all results to a quickfix list
-require("fzf-lua").setup({
-  keymap = {
-    fzf = {
-      ["ctrl-q"] = "select-all+accept",
-    },
-  },
-  grep = {
-    hidden = false
-  },
-  files = {
-    hidden = false
-  },
-  -- Make the search query text darker for better visibility with sunmage
-  fzf_colors = {
-    ["query"] = { "fg", "Normal" },  -- Use Normal fg color which is #4a4a4a in sunmage
-  }
-})
-vim.keymap.set("n", "<leader>fd", ":FzfLua files<cr>")
-vim.keymap.set("n", "<leader>fg", ":FzfLua live_grep<cr>")
-vim.keymap.set("n", "<leader>fs", ":FzfLua lsp_live_workspace_symbols<cr>")
-vim.keymap.set("n", "<leader>fm", ":FzfLua marks<cr>")
-
--- Set up oil
-require('oil').setup()
-vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
-
-require("mini.pairs").setup {
-  modes = { insert = true, command = true, terminal = false },
-  -- skip autopair when next character is one of these
-  skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-  -- skip autopair when the cursor is inside these treesitter nodes
-  skip_ts = { "string" },
-  -- skip autopair when next character is closing pair
-  -- and there are more closing pairs than opening pairs
-  skip_unbalanced = true,
-  -- better deal with markdown code blocks
-  markdown = true,
-}
-
--- Set up harpoon
-local harpoon = require("harpoon")
-
--- REQUIRED
-harpoon:setup()
--- REQUIRED
-
-vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
-vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
-
--- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
-
-
--- Set up indent scope
-require("mini.indentscope").setup({
-  symbol = "│",
-  options = { try_as_border = true }
-})
-
--- Set up Trouble
-require("trouble").setup({})
-
--- Integrate Trouble with fzf-lua
-local config = require("fzf-lua.config")
-local actions = require("trouble.sources.fzf").actions
-config.defaults.actions.files["ctrl-t"] = actions.open
-
--- Set up Trouble keymaps
-vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
-vim.keymap.set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
-vim.keymap.set("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
-vim.keymap.set("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references / ... (Trouble)" })
-
--- Set up smart-splits
-require('smart-splits').setup({})
-
--- Smart-splits keymaps with C-a prefix
-vim.keymap.set('n', '<C-a>h', require('smart-splits').move_cursor_left)
-vim.keymap.set('n', '<C-a>j', require('smart-splits').move_cursor_down)
-vim.keymap.set('n', '<C-a>k', require('smart-splits').move_cursor_up)
-vim.keymap.set('n', '<C-a>l', require('smart-splits').move_cursor_right)
-
--- Set up blink
-require("blink.cmp").setup({})
