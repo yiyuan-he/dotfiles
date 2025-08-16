@@ -1,5 +1,5 @@
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
-theme = "tokyonight-moon"
+theme = "iceclimber"
 keybind = shift+enter=text:\n

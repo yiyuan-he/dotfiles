@@ -85,11 +85,19 @@ require("lazy").setup({
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.cmd("colorscheme tokyonight")
-    end,
   },
   { "catppuccin/nvim", name = "catppuccin", lazy = true },
+  {
+    "cdmill/neomodern.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("neomodern").setup({
+
+      })
+      require("neomodern").load()
+    end,
+  },
 
   -- LSP & Development
   {
