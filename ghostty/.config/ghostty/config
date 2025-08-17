@@ -1,5 +1,5 @@
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
-theme = "iceclimber"
+theme = "gruvbox-dark"
 keybind = shift+enter=text:\n
