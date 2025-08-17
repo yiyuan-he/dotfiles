@@ -86,7 +86,13 @@ require("lazy").setup({
     lazy = false,
     priority = 1000,
   },
-  { "catppuccin/nvim", name = "catppuccin", lazy = true },
+  { "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme "catppuccin"
+    end
+  },
   {
     "cdmill/neomodern.nvim",
     lazy = false,
@@ -97,10 +103,6 @@ require("lazy").setup({
     priority = 1000,
     config = true,
     opts = ...,
-    config = function()
-      require("gruvbox").setup({})
-      vim.cmd("colorscheme gruvbox")
-    end
   },
 
   -- LSP & Development

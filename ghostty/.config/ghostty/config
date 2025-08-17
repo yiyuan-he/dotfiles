@@ -1,5 +1,5 @@
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
-theme = "gruvbox-dark"
+theme = "catppuccin-mocha"
 keybind = shift+enter=text:\n
