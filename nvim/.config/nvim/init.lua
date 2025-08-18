@@ -9,6 +9,13 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- ============================================================================
+-- Performance Optimizations
+-- ============================================================================
+-- Disable Python provider (not using Python remote plugins)
+-- This significantly speeds up startup when opening Python files
+vim.g.loaded_python3_provider = 0
+
+-- ============================================================================
 -- Options
 -- ============================================================================
 -- UI
