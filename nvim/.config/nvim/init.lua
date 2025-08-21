@@ -96,9 +96,6 @@ require("lazy").setup({
   { "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme "catppuccin"
-    end
   },
   {
     "cdmill/neomodern.nvim",
@@ -320,6 +317,11 @@ require("lazy").setup({
   -- Dependencies
   { "nvim-lua/plenary.nvim", lazy = true },
 })
+
+-- ============================================================================
+-- Colorscheme
+-- ============================================================================
+vim.cmd.colorscheme "onehalfdark"
 
 -- ============================================================================
 -- Keymaps
