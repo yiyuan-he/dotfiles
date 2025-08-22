@@ -108,6 +108,15 @@ require("lazy").setup({
     config = true,
     opts = ...,
   },
+  {
+    "gbprod/nord.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("nord").setup({})
+      vim.cmd.colorscheme("nord")
+    end,
+  },
 
   -- LSP & Development
   {
@@ -317,11 +326,6 @@ require("lazy").setup({
   -- Dependencies
   { "nvim-lua/plenary.nvim", lazy = true },
 })
-
--- ============================================================================
--- Colorscheme
--- ============================================================================
-vim.cmd.colorscheme "onehalfdark"
 
 -- ============================================================================
 -- Keymaps

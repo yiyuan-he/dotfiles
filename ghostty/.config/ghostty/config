@@ -1,5 +1,6 @@
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
+theme = nord
 
 clipboard-read = allow
 clipboard-write = allow
