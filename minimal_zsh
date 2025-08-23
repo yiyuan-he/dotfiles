@@ -13,7 +13,7 @@ alias claude="/Users/yiyuanh/.claude/local/claude"
 export EDITOR=nvim
 export VISUAL=nvim
 
-export fzf_default_opts="$fzf_default_opts
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 --color=fg:#e5e9f0,bg:#2e3440,hl:#81a1c1,gutter:#2e3440
 --color=fg+:#eceff4,bg+:#3b4252,hl+:#88c0d0
 --color=info:#5e81ac,prompt:#81a1c1,pointer:#88c0d0
