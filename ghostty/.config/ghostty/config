@@ -1,6 +1,6 @@
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = nord
+theme = evergarden-fall
 
 clipboard-read = allow
 clipboard-write = allow
