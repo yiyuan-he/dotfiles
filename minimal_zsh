@@ -14,10 +14,11 @@ export EDITOR=nvim
 export VISUAL=nvim
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
---color=fg:#e5e9f0,bg:#2e3440,hl:#81a1c1,gutter:#2e3440
---color=fg+:#eceff4,bg+:#3b4252,hl+:#88c0d0
---color=info:#5e81ac,prompt:#81a1c1,pointer:#88c0d0
---color=marker:#bf616a,spinner:#b48ead,header:#a3be8c"
+--color=fg:#f8f9e8,bg:#232a2e,hl:#b2caed,gutter:#232a2e
+--color=fg+:#f8f9e8,bg+:#374145,hl+:#b3e3ca
+--color=info:#f5d098,prompt:#b3e3ca,pointer:#b3e3ca
+--color=marker:#f57f82,spinner:#f3c0e5,header:#cbe3b3
+--color=border:#6f8788,label:#96b4aa,query:#f8f9e8"
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
