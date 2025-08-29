@@ -101,6 +101,12 @@ require("lazy").setup({
     "cdmill/neomodern.nvim",
     lazy = false,
     priority = 1000,
+    config = function()
+      require("neomodern").setup({
+        theme = "roseprime"
+      })
+      require("neomodern").load()
+    end
   },
   {
     "ellisonleao/gruvbox.nvim",
@@ -133,11 +139,6 @@ require("lazy").setup({
         },
       },
     },
-    config = function()
-      require("evergarden").setup({})
-      vim.cmd.colorscheme("evergarden")
-    end,
-
   },
 
   -- LSP & Development
