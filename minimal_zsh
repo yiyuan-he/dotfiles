@@ -24,4 +24,4 @@ source <(fzf --zsh)
 
 eval "$(starship init zsh)"
 eval "$(/Users/yiyuanh/.local/bin/mise activate zsh)"
-eval "$(zoxide init bash)"
+eval "$(zoxide init zsh)"
