@@ -1,0 +1,28 @@
+# Light Mage - High contrast light theme for improved readability
+
+# ANSI Colors - Darker, more readable palette
+palette = 0=#2a2a2a
+palette = 1=#9a3a35
+palette = 2=#4a6a2a
+palette = 3=#9a6a2a
+palette = 4=#2a5a8a
+palette = 5=#6a4a75
+palette = 6=#3a6a65
+palette = 7=#ede7dc
+
+# Bright variants - Enhanced contrast for better visibility
+palette = 8=#525252
+palette = 9=#aa4a4a
+palette = 10=#5a7a3a
+palette = 11=#aa7a3a
+palette = 12=#3a6a9a
+palette = 13=#7a5a85
+palette = 14=#3a8a8a
+palette = 15=#faf8f3
+
+# UI Colors - Optimized for readability with stronger contrast
+background = #faf8f3
+foreground = #2a2a2a
+cursor-color = #2a5a8a
+selection-background = #e0dcd3
+selection-foreground = #2a2a2a

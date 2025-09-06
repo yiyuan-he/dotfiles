@@ -2,6 +2,9 @@
 -- Neovim Configuration
 -- ============================================================================
 
+vim.o.background = "light"
+vim.cmd("colorscheme light-mage")
+
 -- ============================================================================
 -- Leader Keys
 -- ============================================================================
@@ -101,18 +104,6 @@ require("lazy").setup({
     "cdmill/neomodern.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
-      require("neomodern").setup({
-        theme = "roseprime"
-      })
-      require("neomodern").load()
-    end
-  },
-  {
-    "ellisonleao/gruvbox.nvim",
-    priority = 1000,
-    config = true,
-    opts = ...,
   },
   {
     "gbprod/nord.nvim",
