@@ -2,8 +2,7 @@
 -- Neovim Configuration
 -- ============================================================================
 
-vim.o.background = "light"
-vim.cmd("colorscheme light-mage")
+vim.cmd("colorscheme onehalfdark")
 
 -- ============================================================================
 -- Leader Keys
@@ -22,7 +21,6 @@ vim.g.loaded_python3_provider = 0
 -- Options
 -- ============================================================================
 -- UI
-vim.o.background = "dark"
 vim.opt.termguicolors = true
 vim.opt.guicursor = "" -- Always block cursor
 vim.opt.relativenumber = true

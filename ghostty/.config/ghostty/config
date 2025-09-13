@@ -1,6 +1,5 @@
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = light-mage
 
 clipboard-read = allow
 clipboard-write = allow
