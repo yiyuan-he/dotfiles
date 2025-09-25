@@ -88,18 +88,18 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- Colorschemes
   {
-    "folke/tokyonight.nvim",
+    "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
-    -- config = function()
-    --   vim.cmd("colorscheme tokyonight-day")
-    -- end
-  },
-  { "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
     config = function()
-      vim.cmd.colorscheme "catppuccin"
+      require('kanagawa').setup({
+        theme = "dragon",  -- Use Dragon variant for high contrast
+        background = {
+          dark = "dragon",
+          light = "lotus"
+        },
+      })
+      vim.cmd.colorscheme "kanagawa"
     end
   },
 
