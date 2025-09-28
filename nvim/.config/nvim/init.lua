@@ -58,6 +58,12 @@ end
 vim.opt.undodir = undodir
 vim.opt.undofile = true
 
+-- Colorscheme
+local ok, err = pcall(vim.cmd.colorscheme, 'light-mage')
+if not ok then
+  vim.notify('Failed to load colorscheme light-mage: ' .. err, vim.log.levels.ERROR)
+end
+
 -- Clipboard (delayed for performance)
 vim.schedule(function()
   vim.opt.clipboard = "unnamedplus"
@@ -86,23 +92,6 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugin Specifications
 -- ============================================================================
 require("lazy").setup({
-  -- Colorschemes
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('kanagawa').setup({
-        theme = "dragon",  -- Use Dragon variant for high contrast
-        background = {
-          dark = "dragon",
-          light = "lotus"
-        },
-      })
-      vim.cmd.colorscheme "kanagawa"
-    end
-  },
-
   -- LSP & Development
   {
     "neovim/nvim-lspconfig",
