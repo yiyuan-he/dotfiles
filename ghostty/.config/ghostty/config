@@ -1,6 +1,6 @@
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = light-mage
+theme = Nvim Light
 
 clipboard-read = allow
 clipboard-write = allow

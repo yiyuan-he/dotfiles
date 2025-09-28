@@ -58,12 +58,6 @@ end
 vim.opt.undodir = undodir
 vim.opt.undofile = true
 
--- Colorscheme
-local ok, err = pcall(vim.cmd.colorscheme, 'light-mage')
-if not ok then
-  vim.notify('Failed to load colorscheme light-mage: ' .. err, vim.log.levels.ERROR)
-end
-
 -- Clipboard (delayed for performance)
 vim.schedule(function()
   vim.opt.clipboard = "unnamedplus"
