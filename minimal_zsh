@@ -19,11 +19,11 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
     --ansi \
     --layout=reverse \
     --border=none \
-    --color=bg+:#9b9ea4,bg:#e0e2ea,spinner:#470045,hl:#004c73 \
-    --color=fg:#14161b,header:#004c73,info:#4f5258,pointer:#470045 \
-    --color=marker:#005523,fg+:#14161b,prompt:#005523,hl+:#590008 \
-    --color=selected-bg:#9b9ea4 \
-    --color=border:#4f5258,label:#14161b"
+    --color=bg+:#4f5258,bg:#14161b,spinner:#ffcaff,hl:#a6dbff \
+    --color=fg:#e0e2ea,header:#a6dbff,info:#8cf8f7,pointer:#ffcaff \
+    --color=marker:#b3f6c0,fg+:#eef1f8,prompt:#b3f6c0,hl+:#ffc0b9 \
+    --color=selected-bg:#4f5258 \
+    --color=border:#4f5258,label:#e0e2ea"
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)

@@ -94,15 +94,14 @@ require("lazy").setup({
       "folke/lazydev.nvim",
     },
     config = function()
-      -- LSP setup
-      local lspconfig = require("lspconfig")
+      -- LSP setup using new vim.lsp.config API
       local lsps = { "lua_ls", "pyright", "ruff", "ts_ls" }
 
       for _, lsp in pairs(lsps) do
-        local setup = {
+        vim.lsp.config(lsp, {
           root_dir = function() return vim.fn.getcwd() end
-        }
-        lspconfig[lsp].setup(setup)
+        })
+        vim.lsp.enable(lsp)
       end
     end,
   },
@@ -223,38 +222,6 @@ require("lazy").setup({
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    opts = {},
-  },
-
-  -- UI Enhancements
-  {
-    "folke/trouble.nvim",
-    cmd = "Trouble",
-    keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-      { "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP (Trouble)" },
-    },
-    opts = {},
-  },
-
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
-
-  -- Window Management
-  {
-    "mrjones2014/smart-splits.nvim",
-    lazy = false,
-    keys = {
-      { "<C-a>h", function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" },
-      { "<C-a>j", function() require("smart-splits").move_cursor_down() end, desc = "Move to bottom split" },
-      { "<C-a>k", function() require("smart-splits").move_cursor_up() end, desc = "Move to top split" },
-      { "<C-a>l", function() require("smart-splits").move_cursor_right() end, desc = "Move to right split" },
-    },
     opts = {},
   },
 
