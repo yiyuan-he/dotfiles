@@ -1,7 +1,5 @@
 # Set up:
-Config files for my personal development environment. It's designed to quickly set
-up on any Unix/Linux machine. I use a mixture of Arch Linux, Ubuntu, and MacOS and
-this environment generally behaves consistently across all OSes.
+My personal very productive and minimal dev environment. It behaves consistently on both Linux and MacOS thanks to nvim + tmux.
 
 ## Make sure the following are installed:
 - stow
@@ -29,6 +27,3 @@ The following are not necessary but I find they drastically improve my quality o
 life when working in this development environment.
 
 - mise - Easily install languages and associated tooling through a single interface.
-
-- zsh + antigen - Shell and a plugin manager. I like zsh-fast-syntax-highlighting
-and zsh-autosuggestions for the plugins.
