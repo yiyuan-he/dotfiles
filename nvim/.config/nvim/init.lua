@@ -94,15 +94,24 @@ require("lazy").setup({
       "folke/lazydev.nvim",
     },
     config = function()
-      -- LSP setup using new vim.lsp.config API
       local lsps = { "lua_ls", "pyright", "ruff", "ts_ls" }
 
-      for _, lsp in pairs(lsps) do
-        vim.lsp.config(lsp, {
-          root_dir = function() return vim.fn.getcwd() end
-        })
+      for _, lsp in ipairs(lsps) do
+        vim.lsp.config(lsp, {})
         vim.lsp.enable(lsp)
       end
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if not client then return end
+
+          -- Enable completion
+          if client.supports_method('textDocument/completion') then
+            vim.bo[args.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+          end
+        end,
+      })
     end,
   },
 
