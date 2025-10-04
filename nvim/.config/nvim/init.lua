@@ -232,6 +232,11 @@ require("lazy").setup({
         skip_ts = { "string" },
         skip_unbalanced = true,
         markdown = true,
+        mappings = {
+          ['"'] = false,
+          ["'"] = false,
+          ['`'] = false,
+        },
       })
 
       -- Indent scope
