@@ -189,16 +189,12 @@ require("lazy").setup({
     },
     config = function()
       require("fzf-lua").setup({
+        "default",
         keymap = {
           fzf = {
             ["ctrl-q"] = "select-all+accept",
           },
         },
-        grep = { hidden = false },
-        files = { hidden = false },
-        fzf_colors = {
-          ["query"] = { "fg", "Normal" },
-        }
       })
     end,
   },
