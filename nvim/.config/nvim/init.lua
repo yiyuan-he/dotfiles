@@ -252,6 +252,14 @@ require("lazy").setup({
     end,
   },
 
+  -- Colorizer
+  {
+    "catgoose/nvim-colorizer.lua",
+    event = "BufReadPre",
+    opts = { -- set to setup table
+    },
+  },
+
   -- Dependencies
   { "nvim-lua/plenary.nvim", lazy = true },
 })
