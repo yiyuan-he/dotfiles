@@ -117,11 +117,10 @@ require("lazy").setup({
 
   -- Colorscheme
   {
-    "sonph/onehalf",
+    "shaunsingh/nord.nvim",
     priority = 1000,
     config = function()
-      vim.opt.runtimepath:append(vim.fn.stdpath("data") .. "/lazy/onehalf/vim")
-      vim.cmd.colorscheme "onehalfdark"
+      vim.cmd.colorscheme "nord"
     end
   },
 
