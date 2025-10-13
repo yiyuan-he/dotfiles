@@ -147,9 +147,15 @@ require("lazy").setup({
         auto_install = true,
         sync_install = false,
         highlight = { enable = true },
-        indent = { enable = true, disable = {"ocaml"} },
+        indent = { enable = true, disable = {"ocaml", "python"} },
       })
     end,
+  },
+
+  -- Python indentation
+  {
+    "Vimjas/vim-python-pep8-indent",
+    ft = "python",
   },
 
   -- Completion
