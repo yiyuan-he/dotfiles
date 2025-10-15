@@ -306,6 +306,7 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix" })
 
 -- LSP
 vim.keymap.set("n", "<space>d", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Show diagnostics" })
+vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { desc = "LSP Rename" })
 
 -- ============================================================================
 -- Autocommands
