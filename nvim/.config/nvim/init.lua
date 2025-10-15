@@ -128,19 +128,9 @@ require("lazy").setup({
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    lazy = false,
     branch = "main",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require("nvim-treesitter").setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-        auto_install = true,
-        sync_install = false,
-        highlight = { enable = true },
-        indent = { enable = true, disable = {"ocaml", "python"} },
-      })
-    end,
+    build = ":TSUpdate",
   },
 
   -- Python indentation
@@ -317,5 +307,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end,
+})
+
+-- Enable treesitter highlighting
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Enable treesitter highlighting',
+  group = vim.api.nvim_create_augroup('treesitter-highlight', { clear = true }),
+  callback = function()
+    pcall(vim.treesitter.start)
   end,
 })
