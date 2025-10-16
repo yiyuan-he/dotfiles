@@ -27,3 +27,5 @@ The following are not necessary but I find they drastically improve my quality o
 life when working in this development environment.
 
 - mise - Easily install languages and associated tooling through a single interface.
+- zoxide - better cd
+- fzf - fuzzy-finder
