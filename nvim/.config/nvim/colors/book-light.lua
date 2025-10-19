@@ -13,21 +13,21 @@ vim.o.background = "light"
 vim.g.colors_name = "book-light"
 
 -- Color palette inspired by the Rust book
--- Using warm, softer tones with reduced contrast for better readability
+-- Optimized for comfort, readability, and focus with high contrast on warm tones
 local colors = {
   -- Background/Foreground - warm cream instead of harsh white
   bg = "#f4f0ed",
-  fg = "#3e3933",
+  fg = "#2d2a24",
 
   -- Cursor
   cursor = "#6b8bb8",
 
   -- Selection
   selection_bg = "#e3ddd7",
-  selection_fg = "#3e3933",
+  selection_fg = "#2d2a24",
 
   -- Softer ANSI colors
-  black = "#3e3933",
+  black = "#2d2a24",
   red = "#c65f5f",
   green = "#80a665",
   yellow = "#d9a456",
