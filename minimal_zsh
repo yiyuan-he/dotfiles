@@ -4,7 +4,7 @@ bindkey -e
 # need to explicity enable editor functionality in zsh
 autoload -z edit-command-line
 zle -N edit-command-line
-bindkey "^G" edit-command-line
+bindkey "^g" edit-command-line
 
 alias vim=nvim
 alias ls='eza -lh --group-directories-first --icons=auto'
