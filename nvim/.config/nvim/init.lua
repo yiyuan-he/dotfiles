@@ -162,27 +162,7 @@ require("lazy").setup({
     lazy = false,
   },
 
-  {
-    "ibhagwan/fzf-lua",
-    cmd = "FzfLua",
-    keys = {
-      { "<leader>fd", ":FzfLua files<cr>", desc = "Find files" },
-      { "<leader>fg", ":FzfLua live_grep<cr>", desc = "Live grep" },
-      { "<leader>fs", ":FzfLua lsp_live_workspace_symbols<cr>", desc = "Workspace symbols" },
-      { "<leader>fm", ":FzfLua marks<cr>", desc = "Marks" },
-    },
-    config = function()
-      require("fzf-lua").setup({
-        "default",
-        keymap = {
-          fzf = {
-            ["ctrl-q"] = "select-all+accept",
-          },
-        },
-      })
-    end,
-  },
-
+  -- Harpoon
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
@@ -260,6 +240,9 @@ require("lazy").setup({
       gitbrowse = { enabled = true },
     },
     keys = {
+      -- Top Pickers & Explorer
+      { "<leader>fd", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
       -- LSP
       { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
       { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
