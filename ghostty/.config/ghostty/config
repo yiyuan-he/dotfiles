@@ -1,7 +1,6 @@
 font-size = 15
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = github-light
 
 clipboard-read = allow
 clipboard-write = allow
