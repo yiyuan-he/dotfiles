@@ -257,12 +257,21 @@ require("lazy").setup({
 
   -- Dependencies
   { "nvim-lua/plenary.nvim", lazy = true },
+
+  -- Oxocarbon
+  {
+    "nyoom-engineering/oxocarbon.nvim"
+    -- Add in any other configuration; 
+    --   event = foo, 
+    --   config = bar
+    --   end,
+  }
 })
 
 -- ============================================================================
 -- Colorscheme
 -- ============================================================================
-vim.cmd.colorscheme("onehalfdark")
+vim.cmd.colorscheme "oxocarbon"
 
 -- ============================================================================
 -- Keymaps
