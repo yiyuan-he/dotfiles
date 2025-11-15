@@ -1,7 +1,7 @@
 font-size = 15
-font-family = "Berkeley Mono"
+font-family = "PragmataPro Mono Liga Regular"
 keybind = shift+enter=text:\n
-theme = "Oxocarbon"
+theme = "iceberg-dark"
 
 clipboard-read = allow
 clipboard-write = allow
