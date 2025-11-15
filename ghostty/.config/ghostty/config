@@ -1,5 +1,5 @@
 font-size = 15
-font-family = "PragmataPro Mono Liga Regular"
+font-family = "PragmataPro Mono Liga"
 keybind = shift+enter=text:\n
 theme = "iceberg-dark"
 
