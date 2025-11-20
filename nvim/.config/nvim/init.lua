@@ -182,13 +182,6 @@ require("lazy").setup({
     end,
   },
 
-  -- Git
-  {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {},
-  },
-
   -- Mini.nvim modules
   {
     "echasnovski/mini.nvim",
@@ -212,6 +205,14 @@ require("lazy").setup({
       require("mini.indentscope").setup({
         symbol = "│",
         options = { try_as_border = true }
+      })
+
+      -- Git diff signs
+      require("mini.diff").setup({
+        view = {
+          style = 'sign',
+          signs = { add = '+', change = '~', delete = '-' },
+        },
       })
     end,
   },
@@ -238,6 +239,7 @@ require("lazy").setup({
       quickfile = { enabled = true },
       image = { enabled = true },
       gitbrowse = { enabled = true },
+      statuscolumn = { enabled = true },
     },
     keys = {
       -- Top Pickers & Explorer
