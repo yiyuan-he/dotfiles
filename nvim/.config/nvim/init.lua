@@ -262,13 +262,15 @@ require("lazy").setup({
   -- Dependencies
   { "nvim-lua/plenary.nvim", lazy = true },
 
-  { "cocopon/iceberg.vim" }
+  -- Colorschemes
+  { "cocopon/iceberg.vim" },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 })
 
 -- ============================================================================
 -- Colorscheme
 -- ============================================================================
-vim.cmd.colorscheme "iceberg"
+vim.cmd.colorscheme "catppuccin"
 
 -- ============================================================================
 -- Keymaps
