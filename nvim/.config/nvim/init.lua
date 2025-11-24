@@ -245,7 +245,7 @@ require("lazy").setup({
     },
     keys = {
       -- Top Pickers & Explorer
-      { "<leader>fd", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+      { "<leader>fd", function() Snacks.picker.files() end, desc = "Find Files" },
       { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
       -- LSP
       { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
@@ -288,6 +288,9 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix" })
 -- LSP
 vim.keymap.set("n", "<space>d", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Show diagnostics" })
 vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { desc = "LSP Rename" })
+
+-- Run Python file
+vim.keymap.set("n", "<F9>", "<cmd>!python3 %<CR>", { desc = "Run Python file" })
 
 -- ============================================================================
 -- Autocommands
