@@ -214,8 +214,6 @@ require("lazy").setup({
           signs = { add = '+', change = '~', delete = '-' },
         },
       })
-
-      require("mini.cursorword").setup({})
     end,
   },
 
