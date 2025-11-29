@@ -1,6 +1,6 @@
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = "edge-light"
+theme = "atom-one-light"
 
 clipboard-read = allow
 clipboard-write = allow

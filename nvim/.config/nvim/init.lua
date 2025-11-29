@@ -263,13 +263,15 @@ require("lazy").setup({
   -- Colorschemes
   { "cocopon/iceberg.vim" },
   { "sainnhe/edge", lazy = false, priority = 1000 },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "navarasu/onedark.nvim", priority = 1000 }
 })
 
 -- ============================================================================
 -- Colorscheme
 -- ============================================================================
-vim.cmd.colorscheme "edge"
+require("onedark").setup()
+require("onedark").load()
 
 -- ============================================================================
 -- Keymaps
