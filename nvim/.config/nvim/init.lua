@@ -239,7 +239,6 @@ require("lazy").setup({
       quickfile = { enabled = true },
       image = { enabled = true },
       gitbrowse = { enabled = true },
-      statuscolumn = { enabled = true },
     },
     keys = {
       -- Top Pickers & Explorer
