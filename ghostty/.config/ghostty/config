@@ -1,6 +1,20 @@
+# Font
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 theme = "atom-one-light"
+
+# Window
+window-theme = ghostty
+window-padding-x = 14
+window-padding-y = 14
+confirm-close-surface=false
+
+# Cursor styling
+cursor-style = "block"
+cursor-style-blink = false
+
+# Cursor styling + SSH session terminfo
+shell-integration-features = no-cursor,ssh-env
 
 clipboard-read = allow
 clipboard-write = allow
