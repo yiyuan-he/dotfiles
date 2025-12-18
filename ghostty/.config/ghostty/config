@@ -1,12 +1,13 @@
 # Font
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = "atom-one-light"
+theme = "Monokai Pro Light"
 
 # Window
 window-theme = ghostty
 window-padding-x = 14
 window-padding-y = 14
+unfocused-split-opacity = 1
 confirm-close-surface=false
 
 # Cursor styling
