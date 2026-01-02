@@ -1,7 +1,7 @@
 # Font
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = "Monokai Pro Light"
+theme = "Monokai Pro Light Sun"
 
 # Window
 window-theme = ghostty
