@@ -1,0 +1,1 @@
+require("xcode-light").setup()
