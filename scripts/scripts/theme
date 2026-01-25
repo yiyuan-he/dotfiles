@@ -1,0 +1,138 @@
+#!/bin/bash
+
+# Theme switcher for xcode-light and xcode-dark
+# Updates: Ghostty, tmux, FZF (zshrc), and provides nvim command
+
+ZSHRC="$HOME/.zshrc"
+TMUX_CONF="$HOME/.tmux.conf"
+GHOSTTY_CONF="$HOME/.config/ghostty/config"
+NVIM_INIT="$HOME/.config/nvim/init.lua"
+
+# Light theme values
+LIGHT_GHOSTTY='theme = "Xcode Light"'
+LIGHT_TMUX_MODE='set -g mode-style "fg=#262626,bg=#b4d8fd"'
+LIGHT_TMUX_MSG='set -g message-style "fg=#262626,bg=#e5e5e5"'
+LIGHT_TMUX_MSG_CMD='set -g message-command-style "fg=#262626,bg=#e5e5e5"'
+LIGHT_TMUX_PANE='set -g pane-border-style "fg=#c0c9d0"'
+LIGHT_TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#0f68a0"'
+LIGHT_TMUX_STATUS='set -g status-style "fg=#262626,bg=#ffffff"'
+LIGHT_TMUX_WIN='setw -g window-status-style "fg=#0f68a0,bg=#ffffff"'
+LIGHT_TMUX_WIN_CUR='setw -g window-status-current-style "fg=#ffffff,bg=#0f68a0"'
+LIGHT_TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#ffffff,bg=#ad3da4"'
+LIGHT_FZF='    --color=bg+:#b4d8fd,bg:#ffffff,spinner:#804fb8,hl:#ad3da4 \
+    --color=fg:#262626,header:#0f68a0,info:#0f68a0,pointer:#ad3da4 \
+    --color=marker:#3e8087,fg+:#262626,prompt:#ad3da4,hl+:#ad3da4 \
+    --color=selected-bg:#b4d8fd \
+    --color=border:#c0c9d0,label:#262626"'
+
+# Dark theme values
+DARK_GHOSTTY='theme = "Xcode Dark"'
+DARK_TMUX_MODE='set -g mode-style "fg=#dfdfe0,bg=#414453"'
+DARK_TMUX_MSG='set -g message-style "fg=#dfdfe0,bg=#383a42"'
+DARK_TMUX_MSG_CMD='set -g message-command-style "fg=#dfdfe0,bg=#383a42"'
+DARK_TMUX_PANE='set -g pane-border-style "fg=#414453"'
+DARK_TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#4eb0cc"'
+DARK_TMUX_STATUS='set -g status-style "fg=#dfdfe0,bg=#292a30"'
+DARK_TMUX_WIN='setw -g window-status-style "fg=#4eb0cc,bg=#292a30"'
+DARK_TMUX_WIN_CUR='setw -g window-status-current-style "fg=#292a30,bg=#4eb0cc"'
+DARK_TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#292a30,bg=#ff7ab2"'
+DARK_FZF='    --color=bg+:#414453,bg:#292a30,spinner:#b281eb,hl:#ff7ab2 \
+    --color=fg:#dfdfe0,header:#4eb0cc,info:#4eb0cc,pointer:#ff7ab2 \
+    --color=marker:#78c2b3,fg+:#dfdfe0,prompt:#ff7ab2,hl+:#ff7ab2 \
+    --color=selected-bg:#414453 \
+    --color=border:#414453,label:#dfdfe0"'
+
+usage() {
+    echo "Usage: theme [light|dark]"
+    echo ""
+    echo "Switches between xcode-light and xcode-dark themes."
+    echo "Updates Ghostty, tmux, FZF, and nvim configs."
+    exit 1
+}
+
+switch_theme() {
+    local mode=$1
+
+    if [[ "$mode" == "light" ]]; then
+        GHOSTTY="$LIGHT_GHOSTTY"
+        TMUX_MODE="$LIGHT_TMUX_MODE"
+        TMUX_MSG="$LIGHT_TMUX_MSG"
+        TMUX_MSG_CMD="$LIGHT_TMUX_MSG_CMD"
+        TMUX_PANE="$LIGHT_TMUX_PANE"
+        TMUX_PANE_ACTIVE="$LIGHT_TMUX_PANE_ACTIVE"
+        TMUX_STATUS="$LIGHT_TMUX_STATUS"
+        TMUX_WIN="$LIGHT_TMUX_WIN"
+        TMUX_WIN_CUR="$LIGHT_TMUX_WIN_CUR"
+        TMUX_WIN_ACT="$LIGHT_TMUX_WIN_ACT"
+        FZF="$LIGHT_FZF"
+        NVIM_SCHEME="xcode-light"
+    elif [[ "$mode" == "dark" ]]; then
+        GHOSTTY="$DARK_GHOSTTY"
+        TMUX_MODE="$DARK_TMUX_MODE"
+        TMUX_MSG="$DARK_TMUX_MSG"
+        TMUX_MSG_CMD="$DARK_TMUX_MSG_CMD"
+        TMUX_PANE="$DARK_TMUX_PANE"
+        TMUX_PANE_ACTIVE="$DARK_TMUX_PANE_ACTIVE"
+        TMUX_STATUS="$DARK_TMUX_STATUS"
+        TMUX_WIN="$DARK_TMUX_WIN"
+        TMUX_WIN_CUR="$DARK_TMUX_WIN_CUR"
+        TMUX_WIN_ACT="$DARK_TMUX_WIN_ACT"
+        FZF="$DARK_FZF"
+        NVIM_SCHEME="xcode-dark"
+    else
+        usage
+    fi
+
+    # Update Ghostty
+    if [[ -f "$GHOSTTY_CONF" ]]; then
+        sed -i '' 's/^theme = .*/'"$GHOSTTY"'/' "$GHOSTTY_CONF"
+        echo "Updated Ghostty config"
+    fi
+
+    # Update tmux.conf
+    if [[ -f "$TMUX_CONF" ]]; then
+        sed -i '' 's/^set -g mode-style .*/'"$TMUX_MODE"'/' "$TMUX_CONF"
+        sed -i '' 's/^set -g message-style .*/'"$TMUX_MSG"'/' "$TMUX_CONF"
+        sed -i '' 's/^set -g message-command-style .*/'"$TMUX_MSG_CMD"'/' "$TMUX_CONF"
+        sed -i '' 's/^set -g pane-border-style .*/'"$TMUX_PANE"'/' "$TMUX_CONF"
+        sed -i '' 's/^set -g pane-active-border-style .*/'"$TMUX_PANE_ACTIVE"'/' "$TMUX_CONF"
+        sed -i '' 's/^set -g status-style .*/'"$TMUX_STATUS"'/' "$TMUX_CONF"
+        sed -i '' 's/^setw -g window-status-style .*/'"$TMUX_WIN"'/' "$TMUX_CONF"
+        sed -i '' 's/^setw -g window-status-current-style .*/'"$TMUX_WIN_CUR"'/' "$TMUX_CONF"
+        sed -i '' 's/^setw -g window-status-activity-style .*/'"$TMUX_WIN_ACT"'/' "$TMUX_CONF"
+        echo "Updated tmux config"
+
+        # Reload tmux if running
+        if [[ -n "$TMUX" ]]; then
+            tmux source-file "$TMUX_CONF" 2>/dev/null
+            echo "Reloaded tmux"
+        fi
+    fi
+
+    # Update zshrc FZF colors
+    if [[ -f "$ZSHRC" ]]; then
+        # Use perl for multi-line replacement
+        perl -i -0pe 's/--color=bg\+:[^"]+"/'"$FZF"'/s' "$ZSHRC"
+        echo "Updated FZF colors in zshrc"
+    fi
+
+    # Update nvim colorscheme
+    if [[ -f "$NVIM_INIT" ]]; then
+        sed -i '' 's/vim\.cmd\.colorscheme("[^"]*")/vim.cmd.colorscheme("'"$NVIM_SCHEME"'")/' "$NVIM_INIT"
+        echo "Updated nvim colorscheme"
+    fi
+
+    echo ""
+    echo "Theme switched to: $mode"
+    echo ""
+    echo "To complete the switch:"
+    echo "  1. Restart Ghostty (or open new window)"
+    echo "  2. Source your shell: source ~/.zshrc"
+    echo "  3. Restart nvim (or run :colorscheme $NVIM_SCHEME)"
+}
+
+if [[ $# -ne 1 ]]; then
+    usage
+fi
+
+switch_theme "$1"
