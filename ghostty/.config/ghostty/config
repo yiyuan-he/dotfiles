@@ -1,7 +1,7 @@
 # Font
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = "Xcode Dark"
+theme = "Xcode Light"
 
 # Window
 window-theme = ghostty
