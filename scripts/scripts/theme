@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Theme switcher for xcode-light and xcode-dark
+# Theme switcher for Tokyo Night light and dark variants
 # Updates: Ghostty, tmux, FZF (zshrc), and provides nvim command
 
 ZSHRC="$HOME/.zshrc"
@@ -8,44 +8,44 @@ TMUX_CONF="$HOME/.tmux.conf"
 GHOSTTY_CONF="$HOME/.config/ghostty/config"
 NVIM_INIT="$HOME/.config/nvim/init.lua"
 
-# Light theme values
-LIGHT_GHOSTTY='theme = "Xcode Light"'
-LIGHT_TMUX_MODE='set -g mode-style "fg=#262626,bg=#b4d8fd"'
-LIGHT_TMUX_MSG='set -g message-style "fg=#262626,bg=#e5e5e5"'
-LIGHT_TMUX_MSG_CMD='set -g message-command-style "fg=#262626,bg=#e5e5e5"'
-LIGHT_TMUX_PANE='set -g pane-border-style "fg=#c0c9d0"'
-LIGHT_TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#0f68a0"'
-LIGHT_TMUX_STATUS='set -g status-style "fg=#262626,bg=#ffffff"'
-LIGHT_TMUX_WIN='setw -g window-status-style "fg=#0f68a0,bg=#ffffff"'
-LIGHT_TMUX_WIN_CUR='setw -g window-status-current-style "fg=#ffffff,bg=#0f68a0"'
-LIGHT_TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#ffffff,bg=#ad3da4"'
-LIGHT_FZF='    --color=bg+:#b4d8fd,bg:#ffffff,spinner:#804fb8,hl:#ad3da4 \
-    --color=fg:#262626,header:#0f68a0,info:#0f68a0,pointer:#ad3da4 \
-    --color=marker:#3e8087,fg+:#262626,prompt:#ad3da4,hl+:#ad3da4 \
-    --color=selected-bg:#b4d8fd \
-    --color=border:#c0c9d0,label:#262626"'
+# Light theme values (Tokyo Night Day)
+LIGHT_GHOSTTY='theme = "tokyonight-day"'
+LIGHT_TMUX_MODE='set -g mode-style "fg=#3760bf,bg=#b7c1e3"'
+LIGHT_TMUX_MSG='set -g message-style "fg=#3760bf,bg=#e1e2e7"'
+LIGHT_TMUX_MSG_CMD='set -g message-command-style "fg=#3760bf,bg=#e1e2e7"'
+LIGHT_TMUX_PANE='set -g pane-border-style "fg=#a1a6c5"'
+LIGHT_TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#2e7de9"'
+LIGHT_TMUX_STATUS='set -g status-style "fg=#3760bf,bg=#e1e2e7"'
+LIGHT_TMUX_WIN='setw -g window-status-style "fg=#2e7de9,bg=#e1e2e7"'
+LIGHT_TMUX_WIN_CUR='setw -g window-status-current-style "fg=#e1e2e7,bg=#2e7de9"'
+LIGHT_TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#e1e2e7,bg=#9854f1"'
+LIGHT_FZF='    --color=bg+:#b7c1e3,bg:#e1e2e7,spinner:#9854f1,hl:#f52a65 \
+    --color=fg:#3760bf,header:#2e7de9,info:#2e7de9,pointer:#f52a65 \
+    --color=marker:#007197,fg+:#3760bf,prompt:#f52a65,hl+:#f52a65 \
+    --color=selected-bg:#b7c1e3 \
+    --color=border:#a1a6c5,label:#3760bf"'
 
-# Dark theme values
-DARK_GHOSTTY='theme = "Xcode Dark"'
-DARK_TMUX_MODE='set -g mode-style "fg=#dfdfe0,bg=#414453"'
-DARK_TMUX_MSG='set -g message-style "fg=#dfdfe0,bg=#383a42"'
-DARK_TMUX_MSG_CMD='set -g message-command-style "fg=#dfdfe0,bg=#383a42"'
-DARK_TMUX_PANE='set -g pane-border-style "fg=#414453"'
-DARK_TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#4eb0cc"'
-DARK_TMUX_STATUS='set -g status-style "fg=#dfdfe0,bg=#292a30"'
-DARK_TMUX_WIN='setw -g window-status-style "fg=#4eb0cc,bg=#292a30"'
-DARK_TMUX_WIN_CUR='setw -g window-status-current-style "fg=#292a30,bg=#4eb0cc"'
-DARK_TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#292a30,bg=#ff7ab2"'
-DARK_FZF='    --color=bg+:#414453,bg:#292a30,spinner:#b281eb,hl:#ff7ab2 \
-    --color=fg:#dfdfe0,header:#4eb0cc,info:#4eb0cc,pointer:#ff7ab2 \
-    --color=marker:#78c2b3,fg+:#dfdfe0,prompt:#ff7ab2,hl+:#ff7ab2 \
-    --color=selected-bg:#414453 \
-    --color=border:#414453,label:#dfdfe0"'
+# Dark theme values (Tokyo Night)
+DARK_GHOSTTY='theme = "tokyonight-moon"'
+DARK_TMUX_MODE='set -g mode-style "fg=#c8d3f5,bg=#2d3f76"'
+DARK_TMUX_MSG='set -g message-style "fg=#c8d3f5,bg=#222436"'
+DARK_TMUX_MSG_CMD='set -g message-command-style "fg=#c8d3f5,bg=#222436"'
+DARK_TMUX_PANE='set -g pane-border-style "fg=#444a73"'
+DARK_TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#82aaff"'
+DARK_TMUX_STATUS='set -g status-style "fg=#c8d3f5,bg=#222436"'
+DARK_TMUX_WIN='setw -g window-status-style "fg=#82aaff,bg=#222436"'
+DARK_TMUX_WIN_CUR='setw -g window-status-current-style "fg=#222436,bg=#82aaff"'
+DARK_TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#222436,bg=#c099ff"'
+DARK_FZF='    --color=bg+:#2d3f76,bg:#222436,spinner:#c099ff,hl:#ff757f \
+    --color=fg:#c8d3f5,header:#82aaff,info:#82aaff,pointer:#ff757f \
+    --color=marker:#86e1fc,fg+:#c8d3f5,prompt:#ff757f,hl+:#ff757f \
+    --color=selected-bg:#2d3f76 \
+    --color=border:#444a73,label:#c8d3f5"'
 
 usage() {
     echo "Usage: theme [light|dark]"
     echo ""
-    echo "Switches between xcode-light and xcode-dark themes."
+    echo "Switches between Tokyo Night light and dark variants."
     echo "Updates Ghostty, tmux, FZF, and nvim configs."
     exit 1
 }
@@ -65,7 +65,7 @@ switch_theme() {
         TMUX_WIN_CUR="$LIGHT_TMUX_WIN_CUR"
         TMUX_WIN_ACT="$LIGHT_TMUX_WIN_ACT"
         FZF="$LIGHT_FZF"
-        NVIM_SCHEME="xcode-light"
+        NVIM_SCHEME="tokyonight-day"
     elif [[ "$mode" == "dark" ]]; then
         GHOSTTY="$DARK_GHOSTTY"
         TMUX_MODE="$DARK_TMUX_MODE"
@@ -78,7 +78,7 @@ switch_theme() {
         TMUX_WIN_CUR="$DARK_TMUX_WIN_CUR"
         TMUX_WIN_ACT="$DARK_TMUX_WIN_ACT"
         FZF="$DARK_FZF"
-        NVIM_SCHEME="xcode-dark"
+        NVIM_SCHEME="tokyonight-moon"
     else
         usage
     fi
