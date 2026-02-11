@@ -3,10 +3,26 @@
 # Theme switcher for Tokyo Night light and dark variants
 # Updates: Ghostty, tmux, FZF (zshrc), and provides nvim command
 
-ZSHRC="$HOME/.zshrc"
-TMUX_CONF="$HOME/.tmux.conf"
-GHOSTTY_CONF="$HOME/.config/ghostty/config"
-NVIM_INIT="$HOME/.config/nvim/init.lua"
+# Resolve symlinks (macOS sed -i doesn't work on symlinks)
+resolve_path() {
+    local file="$1"
+    if [[ -L "$file" ]]; then
+        local target
+        target="$(readlink "$file")"
+        if [[ "$target" == /* ]]; then
+            echo "$target"
+        else
+            echo "$(dirname "$file")/$target"
+        fi
+    else
+        echo "$file"
+    fi
+}
+
+ZSHRC="$(resolve_path "$HOME/.zshrc")"
+TMUX_CONF="$(resolve_path "$HOME/.tmux.conf")"
+GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
+NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 
 # Light theme values (Tokyo Night Day)
 LIGHT_GHOSTTY='theme = "tokyonight-day"'
