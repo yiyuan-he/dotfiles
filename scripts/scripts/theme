@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Theme switcher for Tokyo Night light and dark variants
-# Updates: Ghostty, tmux, FZF (zshrc), and provides nvim command
+# Theme switcher for multiple colorschemes
+# Updates: Ghostty, tmux, FZF (zshrc), and nvim
 
 # Resolve symlinks (macOS sed -i doesn't work on symlinks)
 resolve_path() {
@@ -24,84 +24,87 @@ TMUX_CONF="$(resolve_path "$HOME/.tmux.conf")"
 GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 
-# Light theme values (Tokyo Night Day)
-LIGHT_GHOSTTY='theme = "tokyonight-day"'
-LIGHT_TMUX_MODE='set -g mode-style "fg=#3760bf,bg=#b7c1e3"'
-LIGHT_TMUX_MSG='set -g message-style "fg=#3760bf,bg=#e1e2e7"'
-LIGHT_TMUX_MSG_CMD='set -g message-command-style "fg=#3760bf,bg=#e1e2e7"'
-LIGHT_TMUX_PANE='set -g pane-border-style "fg=#a1a6c5"'
-LIGHT_TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#2e7de9"'
-LIGHT_TMUX_STATUS='set -g status-style "fg=#3760bf,bg=#e1e2e7"'
-LIGHT_TMUX_WIN='setw -g window-status-style "fg=#2e7de9,bg=#e1e2e7"'
-LIGHT_TMUX_WIN_CUR='setw -g window-status-current-style "fg=#e1e2e7,bg=#2e7de9"'
-LIGHT_TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#e1e2e7,bg=#9854f1"'
-LIGHT_FZF='    --color=bg+:#b7c1e3,bg:#e1e2e7,spinner:#9854f1,hl:#f52a65 \
+SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic")
+
+usage() {
+    echo "Usage: theme <colorscheme>"
+    echo ""
+    echo "Available colorschemes:"
+    for s in "${SCHEMES[@]}"; do
+        echo "  $s"
+    done
+    exit 1
+}
+
+set_theme_vars() {
+    case "$1" in
+        tokyonight-day)
+            GHOSTTY_THEME="tokyonight-day"
+            TMUX_MODE='set -g mode-style "fg=#3760bf,bg=#b7c1e3"'
+            TMUX_MSG='set -g message-style "fg=#3760bf,bg=#e1e2e7"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#3760bf,bg=#e1e2e7"'
+            TMUX_PANE='set -g pane-border-style "fg=#a1a6c5"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#2e7de9"'
+            TMUX_STATUS='set -g status-style "fg=#3760bf,bg=#e1e2e7"'
+            TMUX_WIN='setw -g window-status-style "fg=#2e7de9,bg=#e1e2e7"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#e1e2e7,bg=#2e7de9"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#e1e2e7,bg=#9854f1"'
+            FZF='    --color=bg+:#b7c1e3,bg:#e1e2e7,spinner:#9854f1,hl:#f52a65 \
     --color=fg:#3760bf,header:#2e7de9,info:#2e7de9,pointer:#f52a65 \
     --color=marker:#007197,fg+:#3760bf,prompt:#f52a65,hl+:#f52a65 \
     --color=selected-bg:#b7c1e3 \
     --color=border:#a1a6c5,label:#3760bf"'
-
-# Dark theme values (Tokyo Night)
-DARK_GHOSTTY='theme = "tokyonight-moon"'
-DARK_TMUX_MODE='set -g mode-style "fg=#c8d3f5,bg=#2d3f76"'
-DARK_TMUX_MSG='set -g message-style "fg=#c8d3f5,bg=#222436"'
-DARK_TMUX_MSG_CMD='set -g message-command-style "fg=#c8d3f5,bg=#222436"'
-DARK_TMUX_PANE='set -g pane-border-style "fg=#444a73"'
-DARK_TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#82aaff"'
-DARK_TMUX_STATUS='set -g status-style "fg=#c8d3f5,bg=#222436"'
-DARK_TMUX_WIN='setw -g window-status-style "fg=#82aaff,bg=#222436"'
-DARK_TMUX_WIN_CUR='setw -g window-status-current-style "fg=#222436,bg=#82aaff"'
-DARK_TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#222436,bg=#c099ff"'
-DARK_FZF='    --color=bg+:#2d3f76,bg:#222436,spinner:#c099ff,hl:#ff757f \
+            NVIM_SCHEME="tokyonight-day"
+            ;;
+        tokyonight-moon)
+            GHOSTTY_THEME="tokyonight-moon"
+            TMUX_MODE='set -g mode-style "fg=#c8d3f5,bg=#2d3f76"'
+            TMUX_MSG='set -g message-style "fg=#c8d3f5,bg=#222436"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#c8d3f5,bg=#222436"'
+            TMUX_PANE='set -g pane-border-style "fg=#444a73"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#82aaff"'
+            TMUX_STATUS='set -g status-style "fg=#c8d3f5,bg=#222436"'
+            TMUX_WIN='setw -g window-status-style "fg=#82aaff,bg=#222436"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#222436,bg=#82aaff"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#222436,bg=#c099ff"'
+            FZF='    --color=bg+:#2d3f76,bg:#222436,spinner:#c099ff,hl:#ff757f \
     --color=fg:#c8d3f5,header:#82aaff,info:#82aaff,pointer:#ff757f \
     --color=marker:#86e1fc,fg+:#c8d3f5,prompt:#ff757f,hl+:#ff757f \
     --color=selected-bg:#2d3f76 \
     --color=border:#444a73,label:#c8d3f5"'
-
-usage() {
-    echo "Usage: theme [light|dark]"
-    echo ""
-    echo "Switches between Tokyo Night light and dark variants."
-    echo "Updates Ghostty, tmux, FZF, and nvim configs."
-    exit 1
+            NVIM_SCHEME="tokyonight-moon"
+            ;;
+        material-oceanic)
+            GHOSTTY_THEME="material-oceanic"
+            TMUX_MODE='set -g mode-style "fg=#e8eefd,bg=#6dc2b8"'
+            TMUX_MSG='set -g message-style "fg=#c2c8d7,bg=#1c262b"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#c2c8d7,bg=#1c262b"'
+            TMUX_PANE='set -g pane-border-style "fg=#777777"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#1e80f0"'
+            TMUX_STATUS='set -g status-style "fg=#c2c8d7,bg=#1c262b"'
+            TMUX_WIN='setw -g window-status-style "fg=#1e80f0,bg=#1c262b"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1c262b,bg=#1e80f0"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1c262b,bg=#8800a0"'
+            FZF='    --color=bg+:#6dc2b8,bg:#1c262b,spinner:#8800a0,hl:#ee2b2a \
+    --color=fg:#c2c8d7,header:#1e80f0,info:#1e80f0,pointer:#ee2b2a \
+    --color=marker:#16afca,fg+:#e8eefd,prompt:#ee2b2a,hl+:#ee2b2a \
+    --color=selected-bg:#6dc2b8 \
+    --color=border:#777777,label:#c2c8d7"'
+            NVIM_SCHEME="material"
+            ;;
+        *)
+            usage
+            ;;
+    esac
 }
 
 switch_theme() {
-    local mode=$1
-
-    if [[ "$mode" == "light" ]]; then
-        GHOSTTY="$LIGHT_GHOSTTY"
-        TMUX_MODE="$LIGHT_TMUX_MODE"
-        TMUX_MSG="$LIGHT_TMUX_MSG"
-        TMUX_MSG_CMD="$LIGHT_TMUX_MSG_CMD"
-        TMUX_PANE="$LIGHT_TMUX_PANE"
-        TMUX_PANE_ACTIVE="$LIGHT_TMUX_PANE_ACTIVE"
-        TMUX_STATUS="$LIGHT_TMUX_STATUS"
-        TMUX_WIN="$LIGHT_TMUX_WIN"
-        TMUX_WIN_CUR="$LIGHT_TMUX_WIN_CUR"
-        TMUX_WIN_ACT="$LIGHT_TMUX_WIN_ACT"
-        FZF="$LIGHT_FZF"
-        NVIM_SCHEME="tokyonight-day"
-    elif [[ "$mode" == "dark" ]]; then
-        GHOSTTY="$DARK_GHOSTTY"
-        TMUX_MODE="$DARK_TMUX_MODE"
-        TMUX_MSG="$DARK_TMUX_MSG"
-        TMUX_MSG_CMD="$DARK_TMUX_MSG_CMD"
-        TMUX_PANE="$DARK_TMUX_PANE"
-        TMUX_PANE_ACTIVE="$DARK_TMUX_PANE_ACTIVE"
-        TMUX_STATUS="$DARK_TMUX_STATUS"
-        TMUX_WIN="$DARK_TMUX_WIN"
-        TMUX_WIN_CUR="$DARK_TMUX_WIN_CUR"
-        TMUX_WIN_ACT="$DARK_TMUX_WIN_ACT"
-        FZF="$DARK_FZF"
-        NVIM_SCHEME="tokyonight-moon"
-    else
-        usage
-    fi
+    local scheme=$1
+    set_theme_vars "$scheme"
 
     # Update Ghostty
     if [[ -f "$GHOSTTY_CONF" ]]; then
-        sed -i '' 's/^theme = .*/'"$GHOSTTY"'/' "$GHOSTTY_CONF"
+        sed -i '' 's/^theme = .*/theme = "'"$GHOSTTY_THEME"'"/' "$GHOSTTY_CONF"
         echo "Updated Ghostty config"
     fi
 
@@ -139,7 +142,7 @@ switch_theme() {
     fi
 
     echo ""
-    echo "Theme switched to: $mode"
+    echo "Theme switched to: $scheme"
     echo ""
     echo "To complete the switch:"
     echo "  1. Restart Ghostty (or open new window)"
