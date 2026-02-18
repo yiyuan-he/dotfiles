@@ -76,20 +76,20 @@ set_theme_vars() {
             ;;
         material-oceanic)
             GHOSTTY_THEME="material-oceanic"
-            TMUX_MODE='set -g mode-style "fg=#e8eefd,bg=#6dc2b8"'
-            TMUX_MSG='set -g message-style "fg=#c2c8d7,bg=#1c262b"'
-            TMUX_MSG_CMD='set -g message-command-style "fg=#c2c8d7,bg=#1c262b"'
-            TMUX_PANE='set -g pane-border-style "fg=#777777"'
-            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#1e80f0"'
-            TMUX_STATUS='set -g status-style "fg=#c2c8d7,bg=#1c262b"'
-            TMUX_WIN='setw -g window-status-style "fg=#1e80f0,bg=#1c262b"'
-            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1c262b,bg=#1e80f0"'
-            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1c262b,bg=#8800a0"'
-            FZF='    --color=bg+:#6dc2b8,bg:#1c262b,spinner:#8800a0,hl:#ee2b2a \
-    --color=fg:#c2c8d7,header:#1e80f0,info:#1e80f0,pointer:#ee2b2a \
-    --color=marker:#16afca,fg+:#e8eefd,prompt:#ee2b2a,hl+:#ee2b2a \
-    --color=selected-bg:#6dc2b8 \
-    --color=border:#777777,label:#c2c8d7"'
+            TMUX_MODE='set -g mode-style "fg=#eeffff,bg=#455a64"'
+            TMUX_MSG='set -g message-style "fg=#b0bec5,bg=#1c262b"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#b0bec5,bg=#1c262b"'
+            TMUX_PANE='set -g pane-border-style "fg=#546e7a"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#82aaff"'
+            TMUX_STATUS='set -g status-style "fg=#b0bec5,bg=#1c262b"'
+            TMUX_WIN='setw -g window-status-style "fg=#82aaff,bg=#1c262b"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1c262b,bg=#82aaff"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1c262b,bg=#c792ea"'
+            FZF='    --color=bg+:#455a64,bg:#1c262b,spinner:#c792ea,hl:#ff5370 \
+    --color=fg:#b0bec5,header:#82aaff,info:#82aaff,pointer:#ff5370 \
+    --color=marker:#89ddff,fg+:#eeffff,prompt:#ff5370,hl+:#ff5370 \
+    --color=selected-bg:#455a64 \
+    --color=border:#546e7a,label:#b0bec5"'
             NVIM_SCHEME="material"
             ;;
         *)
