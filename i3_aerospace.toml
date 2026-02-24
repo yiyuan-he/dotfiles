@@ -78,17 +78,15 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
     7 = 'main'
 
-    8 = 'main'
+    8 = ['secondary', 'main']
 
-    9 = 'main'
+    9 = ['secondary', 'main']
 
     10 = ['secondary', 'main']
 
 [[on-window-detected]]
-    if.app-id="com.mitchellh.ghostty"
-    run= [
-      "layout floating",
-    ]
+    check-further-callbacks = true
+    run = 'layout floating'
 
 [mode.resize.binding]
     h = 'resize width -50'
