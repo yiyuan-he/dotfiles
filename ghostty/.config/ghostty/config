@@ -1,7 +1,6 @@
 # Font
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
-theme = "material-oceanic"
 
 # Window
 window-theme = ghostty
