@@ -49,10 +49,10 @@ set_theme_vars() {
             TMUX_WIN='setw -g window-status-style "fg=#2e7de9,bg=#e1e2e7"'
             TMUX_WIN_CUR='setw -g window-status-current-style "fg=#e1e2e7,bg=#2e7de9"'
             TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#e1e2e7,bg=#9854f1"'
-            FZF='    --color=bg+:#b7c1e3,bg:#e1e2e7,spinner:#9854f1,hl:#f52a65 \
-    --color=fg:#3760bf,header:#2e7de9,info:#2e7de9,pointer:#f52a65 \
-    --color=marker:#007197,fg+:#3760bf,prompt:#f52a65,hl+:#f52a65 \
-    --color=selected-bg:#b7c1e3 \
+            FZF='    --color=bg+:#b7c1e3,bg:#e1e2e7,spinner:#9854f1,hl:#f52a65 \\
+    --color=fg:#3760bf,header:#2e7de9,info:#2e7de9,pointer:#f52a65 \\
+    --color=marker:#007197,fg+:#3760bf,prompt:#f52a65,hl+:#f52a65 \\
+    --color=selected-bg:#b7c1e3 \\
     --color=border:#a1a6c5,label:#3760bf"'
             NVIM_SCHEME="tokyonight-day"
             ;;
@@ -67,10 +67,10 @@ set_theme_vars() {
             TMUX_WIN='setw -g window-status-style "fg=#82aaff,bg=#222436"'
             TMUX_WIN_CUR='setw -g window-status-current-style "fg=#222436,bg=#82aaff"'
             TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#222436,bg=#c099ff"'
-            FZF='    --color=bg+:#2d3f76,bg:#222436,spinner:#c099ff,hl:#ff757f \
-    --color=fg:#c8d3f5,header:#82aaff,info:#82aaff,pointer:#ff757f \
-    --color=marker:#86e1fc,fg+:#c8d3f5,prompt:#ff757f,hl+:#ff757f \
-    --color=selected-bg:#2d3f76 \
+            FZF='    --color=bg+:#2d3f76,bg:#222436,spinner:#c099ff,hl:#ff757f \\
+    --color=fg:#c8d3f5,header:#82aaff,info:#82aaff,pointer:#ff757f \\
+    --color=marker:#86e1fc,fg+:#c8d3f5,prompt:#ff757f,hl+:#ff757f \\
+    --color=selected-bg:#2d3f76 \\
     --color=border:#444a73,label:#c8d3f5"'
             NVIM_SCHEME="tokyonight-moon"
             ;;
@@ -85,10 +85,10 @@ set_theme_vars() {
             TMUX_WIN='setw -g window-status-style "fg=#82aaff,bg=#1c262b"'
             TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1c262b,bg=#82aaff"'
             TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1c262b,bg=#c792ea"'
-            FZF='    --color=bg+:#455a64,bg:#1c262b,spinner:#c792ea,hl:#ff5370 \
-    --color=fg:#b0bec5,header:#82aaff,info:#82aaff,pointer:#ff5370 \
-    --color=marker:#89ddff,fg+:#eeffff,prompt:#ff5370,hl+:#ff5370 \
-    --color=selected-bg:#455a64 \
+            FZF='    --color=bg+:#455a64,bg:#1c262b,spinner:#c792ea,hl:#ff5370 \\
+    --color=fg:#b0bec5,header:#82aaff,info:#82aaff,pointer:#ff5370 \\
+    --color=marker:#89ddff,fg+:#eeffff,prompt:#ff5370,hl+:#ff5370 \\
+    --color=selected-bg:#455a64 \\
     --color=border:#546e7a,label:#b0bec5"'
             NVIM_SCHEME="material"
             ;;
@@ -103,10 +103,10 @@ set_theme_vars() {
             TMUX_WIN='setw -g window-status-style "fg=#61afef,bg=#282c34"'
             TMUX_WIN_CUR='setw -g window-status-current-style "fg=#282c34,bg=#61afef"'
             TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#282c34,bg=#c678dd"'
-            FZF='    --color=bg+:#474e5d,bg:#282c34,spinner:#c678dd,hl:#e06c75 \
-    --color=fg:#dcdfe4,header:#61afef,info:#61afef,pointer:#e06c75 \
-    --color=marker:#56b6c2,fg+:#dcdfe4,prompt:#e06c75,hl+:#e06c75 \
-    --color=selected-bg:#474e5d \
+            FZF='    --color=bg+:#474e5d,bg:#282c34,spinner:#c678dd,hl:#e06c75 \\
+    --color=fg:#dcdfe4,header:#61afef,info:#61afef,pointer:#e06c75 \\
+    --color=marker:#56b6c2,fg+:#dcdfe4,prompt:#e06c75,hl+:#e06c75 \\
+    --color=selected-bg:#474e5d \\
     --color=border:#5d677a,label:#dcdfe4"'
             NVIM_SCHEME="onedark"
             ;;
@@ -121,10 +121,10 @@ set_theme_vars() {
             TMUX_WIN='setw -g window-status-style "fg=#89b4fa,bg=#181825"'
             TMUX_WIN_CUR='setw -g window-status-current-style "fg=#181825,bg=#89b4fa"'
             TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#181825,bg=#cba6f7"'
-            FZF='    --color=bg+:#585b70,bg:#1e1e2e,spinner:#cba6f7,hl:#f38ba8 \
-    --color=fg:#cdd6f4,header:#89b4fa,info:#89b4fa,pointer:#f38ba8 \
-    --color=marker:#94e2d5,fg+:#cdd6f4,prompt:#f38ba8,hl+:#f38ba8 \
-    --color=selected-bg:#585b70 \
+            FZF='    --color=bg+:#585b70,bg:#1e1e2e,spinner:#cba6f7,hl:#f38ba8 \\
+    --color=fg:#cdd6f4,header:#89b4fa,info:#89b4fa,pointer:#f38ba8 \\
+    --color=marker:#94e2d5,fg+:#cdd6f4,prompt:#f38ba8,hl+:#f38ba8 \\
+    --color=selected-bg:#585b70 \\
     --color=border:#6c7086,label:#cdd6f4"'
             NVIM_SCHEME="catppuccin-mocha"
             ;;
@@ -176,7 +176,7 @@ theme = "'"$GHOSTTY_THEME"'"' "$GHOSTTY_CONF"
     # Update zshrc FZF colors
     if [[ -f "$ZSHRC" ]]; then
         # Use perl for multi-line replacement
-        perl -i -0pe 's/--color=bg\+:[^"]+"/'"$FZF"'/s' "$ZSHRC"
+        perl -i -0pe 's/ *--color=bg\+:[^"]+"/'"$FZF"'/s' "$ZSHRC"
         echo "Updated FZF colors in zshrc"
     fi
 
