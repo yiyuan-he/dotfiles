@@ -18,11 +18,11 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
                          --ansi \
                          --layout=reverse \
                          --border=none \
-                         --color=bg+:#474e5d,bg:#282c34,spinner:#c678dd,hl:#e06c75 
-                         --color=fg:#dcdfe4,header:#61afef,info:#61afef,pointer:#e06c75 
-                         --color=marker:#56b6c2,fg+:#dcdfe4,prompt:#e06c75,hl+:#e06c75 
-                         --color=selected-bg:#474e5d 
-                         --color=border:#5d677a,label:#dcdfe4"
+                         --color=bg+:#585b70,bg:#1e1e2e,spinner:#cba6f7,hl:#f38ba8 
+                         --color=fg:#cdd6f4,header:#89b4fa,info:#89b4fa,pointer:#f38ba8 
+                         --color=marker:#94e2d5,fg+:#cdd6f4,prompt:#f38ba8,hl+:#f38ba8 
+                         --color=selected-bg:#585b70 
+                         --color=border:#6c7086,label:#cdd6f4"
 
 # Update tmux environment if inside tmux session
                          if [ -n "$TMUX" ]; then

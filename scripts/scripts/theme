@@ -24,7 +24,7 @@ TMUX_CONF="$(resolve_path "$HOME/.tmux.conf")"
 GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 
-SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark")
+SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -109,6 +109,24 @@ set_theme_vars() {
     --color=selected-bg:#474e5d \
     --color=border:#5d677a,label:#dcdfe4"'
             NVIM_SCHEME="onedark"
+            ;;
+        catppuccin-mocha)
+            GHOSTTY_THEME="catppuccin-mocha"
+            TMUX_MODE='set -g mode-style "fg=#cdd6f4,bg=#585b70"'
+            TMUX_MSG='set -g message-style "fg=#cdd6f4,bg=#1e1e2e"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#cdd6f4,bg=#1e1e2e"'
+            TMUX_PANE='set -g pane-border-style "fg=#6c7086"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#89b4fa"'
+            TMUX_STATUS='set -g status-style "fg=#cdd6f4,bg=#181825"'
+            TMUX_WIN='setw -g window-status-style "fg=#89b4fa,bg=#181825"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#181825,bg=#89b4fa"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#181825,bg=#cba6f7"'
+            FZF='    --color=bg+:#585b70,bg:#1e1e2e,spinner:#cba6f7,hl:#f38ba8 \
+    --color=fg:#cdd6f4,header:#89b4fa,info:#89b4fa,pointer:#f38ba8 \
+    --color=marker:#94e2d5,fg+:#cdd6f4,prompt:#f38ba8,hl+:#f38ba8 \
+    --color=selected-bg:#585b70 \
+    --color=border:#6c7086,label:#cdd6f4"'
+            NVIM_SCHEME="catppuccin-mocha"
             ;;
         *)
             usage

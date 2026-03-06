@@ -179,7 +179,7 @@ require("lazy").setup({
 -- Colorscheme
 -- ============================================================================
 vim.g.material_style = "oceanic"
-vim.cmd.colorscheme("onedark")
+vim.cmd.colorscheme("catppuccin-mocha")
 
 -- ============================================================================
 -- Keymaps

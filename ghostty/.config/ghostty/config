@@ -1,4 +1,5 @@
 # Font
+theme = "catppuccin-mocha"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 
