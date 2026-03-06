@@ -111,26 +111,6 @@ require("lazy").setup({
     lazy = false,
   },
 
-  -- Harpoon
-  {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-      { "<leader>a", function() require("harpoon"):list():add() end, desc = "Add to Harpoon" },
-      { "<C-e>", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "Harpoon menu" },
-      { "<leader>1", function() require("harpoon"):list():select(1) end, desc = "Harpoon 1" },
-      { "<leader>2", function() require("harpoon"):list():select(2) end, desc = "Harpoon 2" },
-      { "<leader>3", function() require("harpoon"):list():select(3) end, desc = "Harpoon 3" },
-      { "<leader>4", function() require("harpoon"):list():select(4) end, desc = "Harpoon 4" },
-      { "<C-S-P>", function() require("harpoon"):list():prev() end, desc = "Harpoon prev" },
-      { "<C-S-N>", function() require("harpoon"):list():next() end, desc = "Harpoon next" },
-    },
-    config = function()
-      require("harpoon"):setup()
-    end,
-  },
-
   -- Mini.nvim modules
   {
     "echasnovski/mini.nvim",
@@ -166,14 +146,6 @@ require("lazy").setup({
     end,
   },
 
-  -- Colorizer
-  {
-    "catgoose/nvim-colorizer.lua",
-    event = "BufReadPre",
-    opts = { -- set to setup table
-    },
-  },
-
   -- Snacks
   {
     "folke/snacks.nvim",
@@ -186,19 +158,13 @@ require("lazy").setup({
       -- refer to the configuration section below
       picker = { enabled = true },
       quickfile = { enabled = true },
-      image = { enabled = true },
-      gitbrowse = { enabled = true },
     },
     keys = {
       -- Top Pickers & Explorer
       { "<leader>fd", function() Snacks.picker.files() end, desc = "Find Files" },
       { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
-      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
     }
   },
-
-  -- Dependencies
-  { "nvim-lua/plenary.nvim", lazy = true },
 
   -- Colorschemes
   { "cocopon/iceberg.vim" },
@@ -227,9 +193,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highl
 -- Quickfix navigation
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Next quickfix" })
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix" })
-
--- Run Python file
-vim.keymap.set("n", "<F9>", "<cmd>!python3 %<CR>", { desc = "Run Python file" })
 
 -- ============================================================================
 -- Autocommands
