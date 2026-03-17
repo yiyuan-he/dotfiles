@@ -24,7 +24,7 @@ TMUX_CONF="$(resolve_path "$HOME/.tmux.conf")"
 GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 
-SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha")
+SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -37,6 +37,7 @@ usage() {
 }
 
 set_theme_vars() {
+    NVIM_BG="dark"
     case "$1" in
         tokyonight-day)
             GHOSTTY_THEME="tokyonight-day"
@@ -55,6 +56,7 @@ set_theme_vars() {
     --color=selected-bg:#b7c1e3 \\
     --color=border:#a1a6c5,label:#3760bf"'
             NVIM_SCHEME="tokyonight-day"
+            NVIM_BG="light"
             ;;
         tokyonight-moon)
             GHOSTTY_THEME="tokyonight-moon"
@@ -128,6 +130,25 @@ set_theme_vars() {
     --color=border:#6c7086,label:#cdd6f4"'
             NVIM_SCHEME="catppuccin-mocha"
             ;;
+        solarized-light)
+            GHOSTTY_THEME="iTerm2 Solarized Light"
+            TMUX_MODE='set -g mode-style "fg=#657b83,bg=#eee8d5"'
+            TMUX_MSG='set -g message-style "fg=#657b83,bg=#fdf6e3"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#657b83,bg=#fdf6e3"'
+            TMUX_PANE='set -g pane-border-style "fg=#93a1a1"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#268bd2"'
+            TMUX_STATUS='set -g status-style "fg=#657b83,bg=#eee8d5"'
+            TMUX_WIN='setw -g window-status-style "fg=#268bd2,bg=#eee8d5"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#eee8d5,bg=#268bd2"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#eee8d5,bg=#6c71c4"'
+            FZF='    --color=bg+:#eee8d5,bg:#fdf6e3,spinner:#6c71c4,hl:#dc322f \\
+    --color=fg:#657b83,header:#268bd2,info:#268bd2,pointer:#dc322f \\
+    --color=marker:#2aa198,fg+:#586e75,prompt:#dc322f,hl+:#dc322f \\
+    --color=selected-bg:#eee8d5 \\
+    --color=border:#93a1a1,label:#657b83"'
+            NVIM_SCHEME="solarized"
+            NVIM_BG="light"
+            ;;
         *)
             usage
             ;;
@@ -182,6 +203,7 @@ theme = "'"$GHOSTTY_THEME"'"' "$GHOSTTY_CONF"
 
     # Update nvim colorscheme
     if [[ -f "$NVIM_INIT" ]]; then
+        sed -i '' 's/vim\.o\.background = "[^"]*"/vim.o.background = "'"$NVIM_BG"'"/' "$NVIM_INIT"
         sed -i '' 's/vim\.cmd\.colorscheme("[^"]*")/vim.cmd.colorscheme("'"$NVIM_SCHEME"'")/' "$NVIM_INIT"
         echo "Updated nvim colorscheme"
     fi

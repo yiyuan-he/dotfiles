@@ -173,12 +173,19 @@ require("lazy").setup({
   { "navarasu/onedark.nvim", priority = 1000 },
   { "folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {}, },
   { "marko-cerovac/material.nvim", lazy = false, priority = 1000, opts = { disable = { colored_cursor = true } } },
+  {
+    "maxmx03/solarized.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
 })
 
 -- ============================================================================
 -- Colorscheme
 -- ============================================================================
 vim.g.material_style = "oceanic"
+vim.o.background = "dark"
 vim.cmd.colorscheme("catppuccin-mocha")
 
 -- ============================================================================
