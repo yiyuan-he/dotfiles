@@ -1,6 +1,9 @@
 # emacs keybinds in zsh
 bindkey -e
 
+setopt INC_APPEND_HISTORY   # Write each command to the file immediately
+setopt SHARE_HISTORY         # Read new commands from the file too (implies INC_APPEND_HISTORY)
+
 # need to explicity enable editor functionality in zsh
 autoload -z edit-command-line
 zle -N edit-command-line
