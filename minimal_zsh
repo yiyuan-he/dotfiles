@@ -1,13 +1,18 @@
 # emacs keybinds in zsh
 bindkey -e
 
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=~/.zsh_history
+
 setopt INC_APPEND_HISTORY   # Write each command to the file immediately
 setopt SHARE_HISTORY         # Read new commands from the file too (implies INC_APPEND_HISTORY)
 
 # need to explicity enable editor functionality in zsh
-autoload -z edit-command-line
+autoload -U edit-command-line
 zle -N edit-command-line
-bindkey "^X^E" edit-command-line
+bindkey '^g' edit-command-line
 
 alias vim=nvim
 alias ls='eza -lh --group-directories-first'
@@ -21,20 +26,14 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
                          --ansi \
                          --layout=reverse \
                          --border=none \
-    --color=bg+:#6b7089,bg:#161821,spinner:#a093c7,hl:#e27878 \
-    --color=fg:#c6c8d1,header:#84a0c6,info:#84a0c6,pointer:#e27878 \
-    --color=marker:#89b8c2,fg+:#c6c8d1,prompt:#e27878,hl+:#e27878 \
-    --color=selected-bg:#6b7089 \
-    --color=border:#6b7089,label:#c6c8d1"
-
-# Update tmux environment if inside tmux session
-                         if [ -n "$TMUX" ]; then
-                         tmux set-environment -g FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS"
-                         fi
+                         --color=bg+:#6b7089,bg:#161821,spinner:#a093c7,hl:#e27878 \
+                         --color=fg:#c6c8d1,header:#84a0c6,info:#84a0c6,pointer:#e27878 \
+                         --color=marker:#89b8c2,fg+:#c6c8d1,prompt:#e27878,hl+:#e27878 \
+                         --color=selected-bg:#6b7089 \
+                         --color=border:#6b7089,label:#c6c8d1"
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
-
-    eval "$(starship init zsh)"
-    eval "$(/Users/yiyuanh/.local/bin/mise activate zsh)"
-    eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
+eval "$(/Users/yiyuanh/.local/bin/mise activate zsh)"
+eval "$(zoxide init zsh)"
