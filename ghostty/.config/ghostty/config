@@ -1,5 +1,5 @@
 # Font
-theme = "catppuccin-mocha"
+theme = "roseprime"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 

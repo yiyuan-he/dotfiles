@@ -1,0 +1,28 @@
+# Normal colors (0-7)
+palette = 0=#191919
+palette = 1=#896956
+palette = 2=#5F645F
+palette = 3=#918F84
+palette = 4=#6A6A7A
+palette = 5=#676068
+palette = 6=#575D70
+palette = 7=#616167
+
+# Bright colors (8-15)
+palette = 8=#4c4c57
+palette = 9=#ab836c
+palette = 10=#777d77
+palette = 11=#b5b3a5
+palette = 12=#858599
+palette = 13=#817882
+palette = 14=#6d748c
+palette = 15=#A1A1AC
+
+# Primary colors
+background = #111111
+foreground = #A1A1AC
+cursor-color = #A1A1AC
+
+# Selection colors
+selection-background = #242424
+selection-foreground = #6d748c

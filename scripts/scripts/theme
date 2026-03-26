@@ -23,8 +23,9 @@ ZSHRC="$(resolve_path "$HOME/.zshrc")"
 TMUX_CONF="$(resolve_path "$HOME/.tmux.conf")"
 GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
+MINIMAL_ZSH="$(resolve_path "$HOME/dotfiles/minimal_zsh")"
 
-SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light")
+SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light" "roseprime" "moon")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -149,6 +150,42 @@ set_theme_vars() {
             NVIM_SCHEME="solarized"
             NVIM_BG="light"
             ;;
+        roseprime)
+            GHOSTTY_THEME="roseprime"
+            TMUX_MODE='set -g mode-style "fg=#adadcc,bg=#6C6B9B"'
+            TMUX_MSG='set -g message-style "fg=#adadcc,bg=#121315"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#adadcc,bg=#121315"'
+            TMUX_PANE='set -g pane-border-style "fg=#666a82"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#95b1fc"'
+            TMUX_STATUS='set -g status-style "fg=#adadcc,bg=#111111"'
+            TMUX_WIN='setw -g window-status-style "fg=#95b1fc,bg=#111111"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#111111,bg=#95b1fc"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#111111,bg=#a8a6f5"'
+            FZF='    --color=bg+:#6C6B9B,bg:#121315,spinner:#a8a6f5,hl:#ba5f60 \\
+    --color=fg:#adadcc,header:#95b1fc,info:#95b1fc,pointer:#ba5f60 \\
+    --color=marker:#9bbdb8,fg+:#adadcc,prompt:#ba5f60,hl+:#ba5f60 \\
+    --color=selected-bg:#6C6B9B \\
+    --color=border:#666a82,label:#adadcc"'
+            NVIM_SCHEME="roseprime"
+            ;;
+        moon)
+            GHOSTTY_THEME="moon"
+            TMUX_MODE='set -g mode-style "fg=#A1A1AC,bg=#242424"'
+            TMUX_MSG='set -g message-style "fg=#A1A1AC,bg=#111111"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#A1A1AC,bg=#111111"'
+            TMUX_PANE='set -g pane-border-style "fg=#4c4c57"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#858599"'
+            TMUX_STATUS='set -g status-style "fg=#A1A1AC,bg=#191919"'
+            TMUX_WIN='setw -g window-status-style "fg=#858599,bg=#191919"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#191919,bg=#858599"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#191919,bg=#817882"'
+            FZF='    --color=bg+:#242424,bg:#111111,spinner:#817882,hl:#896956 \\
+    --color=fg:#A1A1AC,header:#858599,info:#858599,pointer:#896956 \\
+    --color=marker:#777d77,fg+:#A1A1AC,prompt:#896956,hl+:#896956 \\
+    --color=selected-bg:#242424 \\
+    --color=border:#4c4c57,label:#A1A1AC"'
+            NVIM_SCHEME="moon"
+            ;;
         *)
             usage
             ;;
@@ -199,6 +236,12 @@ theme = "'"$GHOSTTY_THEME"'"' "$GHOSTTY_CONF"
         # Use perl for multi-line replacement
         perl -i -0pe 's/ *--color=bg\+:[^"]+"/'"$FZF"'/s' "$ZSHRC"
         echo "Updated FZF colors in zshrc"
+    fi
+
+    # Update minimal_zsh FZF colors
+    if [[ -f "$MINIMAL_ZSH" ]]; then
+        perl -i -0pe 's/ *--color=bg\+:[^"]+"/'"$FZF"'/s' "$MINIMAL_ZSH"
+        echo "Updated FZF colors in minimal_zsh"
     fi
 
     # Update nvim colorscheme
