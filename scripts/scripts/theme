@@ -25,7 +25,7 @@ GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 MINIMAL_ZSH="$(resolve_path "$HOME/dotfiles/minimal_zsh")"
 
-SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light" "roseprime" "moon")
+SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light" "roseprime" "moon" "hojicha" "iceberg" "gruvbox")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -185,6 +185,60 @@ set_theme_vars() {
     --color=selected-bg:#242424 \\
     --color=border:#4c4c57,label:#A1A1AC"'
             NVIM_SCHEME="moon"
+            ;;
+        hojicha)
+            GHOSTTY_THEME="hojicha"
+            TMUX_MODE='set -g mode-style "fg=#AEA09F,bg=#2A2927"'
+            TMUX_MSG='set -g message-style "fg=#AEA09F,bg=#171614"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#AEA09F,bg=#171614"'
+            TMUX_PANE='set -g pane-border-style "fg=#68605F"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#808796"'
+            TMUX_STATUS='set -g status-style "fg=#AEA09F,bg=#1F1E1C"'
+            TMUX_WIN='setw -g window-status-style "fg=#808796,bg=#1F1E1C"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1F1E1C,bg=#808796"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1F1E1C,bg=#8a879c"'
+            FZF='    --color=bg+:#2A2927,bg:#171614,spinner:#8a879c,hl:#6E665E \\
+    --color=fg:#AEA09F,header:#808796,info:#808796,pointer:#6E665E \\
+    --color=marker:#717d6e,fg+:#AEA09F,prompt:#6E665E,hl+:#6E665E \\
+    --color=selected-bg:#2A2927 \\
+    --color=border:#68605F,label:#AEA09F"'
+            NVIM_SCHEME="hojicha"
+            ;;
+        iceberg)
+            GHOSTTY_THEME="iceberg-dark"
+            TMUX_MODE='set -g mode-style "fg=#c6c8d1,bg=#6b7089"'
+            TMUX_MSG='set -g message-style "fg=#c6c8d1,bg=#161821"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#c6c8d1,bg=#161821"'
+            TMUX_PANE='set -g pane-border-style "fg=#6b7089"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#84a0c6"'
+            TMUX_STATUS='set -g status-style "fg=#c6c8d1,bg=#1e2132"'
+            TMUX_WIN='setw -g window-status-style "fg=#84a0c6,bg=#1e2132"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1e2132,bg=#84a0c6"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1e2132,bg=#a093c7"'
+            FZF='    --color=bg+:#6b7089,bg:#161821,spinner:#a093c7,hl:#e27878 \\
+    --color=fg:#c6c8d1,header:#84a0c6,info:#84a0c6,pointer:#e27878 \\
+    --color=marker:#89b8c2,fg+:#c6c8d1,prompt:#e27878,hl+:#e27878 \\
+    --color=selected-bg:#6b7089 \\
+    --color=border:#6b7089,label:#c6c8d1"'
+            NVIM_SCHEME="iceberg"
+            ;;
+        gruvbox)
+            GHOSTTY_THEME="gruvbox-dark"
+            TMUX_MODE='set -g mode-style "fg=#ebdbb2,bg=#504945"'
+            TMUX_MSG='set -g message-style "fg=#ebdbb2,bg=#282828"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#ebdbb2,bg=#282828"'
+            TMUX_PANE='set -g pane-border-style "fg=#928374"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#83a598"'
+            TMUX_STATUS='set -g status-style "fg=#ebdbb2,bg=#282828"'
+            TMUX_WIN='setw -g window-status-style "fg=#83a598,bg=#282828"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#282828,bg=#83a598"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#282828,bg=#d3869b"'
+            FZF='    --color=bg+:#504945,bg:#282828,spinner:#d3869b,hl:#fb4934 \\
+    --color=fg:#ebdbb2,header:#83a598,info:#83a598,pointer:#fb4934 \\
+    --color=marker:#8ec07c,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934 \\
+    --color=selected-bg:#504945 \\
+    --color=border:#928374,label:#ebdbb2"'
+            NVIM_SCHEME="gruvbox"
             ;;
         *)
             usage

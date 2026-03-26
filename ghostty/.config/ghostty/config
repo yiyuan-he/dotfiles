@@ -1,5 +1,5 @@
 # Font
-theme = "roseprime"
+theme = "iceberg-dark"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 

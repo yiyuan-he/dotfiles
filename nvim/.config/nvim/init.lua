@@ -168,6 +168,7 @@ require("lazy").setup({
 
   -- Colorschemes
   { "cocopon/iceberg.vim" },
+  { "morhetz/gruvbox", lazy = false, priority = 1000 },
   { "sainnhe/edge", lazy = false, priority = 1000 },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   { "navarasu/onedark.nvim", priority = 1000 },
@@ -187,7 +188,7 @@ require("lazy").setup({
 -- ============================================================================
 vim.g.material_style = "oceanic"
 vim.o.background = "dark"
-vim.cmd.colorscheme("roseprime")
+vim.cmd.colorscheme("iceberg")
 
 -- ============================================================================
 -- Keymaps
