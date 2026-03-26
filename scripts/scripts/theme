@@ -120,10 +120,10 @@ set_theme_vars() {
             TMUX_MSG_CMD='set -g message-command-style "fg=#cdd6f4,bg=#1e1e2e"'
             TMUX_PANE='set -g pane-border-style "fg=#6c7086"'
             TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#89b4fa"'
-            TMUX_STATUS='set -g status-style "fg=#cdd6f4,bg=#181825"'
-            TMUX_WIN='setw -g window-status-style "fg=#89b4fa,bg=#181825"'
-            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#181825,bg=#89b4fa"'
-            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#181825,bg=#cba6f7"'
+            TMUX_STATUS='set -g status-style "fg=#cdd6f4,bg=#1e1e2e"'
+            TMUX_WIN='setw -g window-status-style "fg=#89b4fa,bg=#1e1e2e"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1e1e2e,bg=#89b4fa"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1e1e2e,bg=#cba6f7"'
             FZF='    --color=bg+:#585b70,bg:#1e1e2e,spinner:#cba6f7,hl:#f38ba8 \\
     --color=fg:#cdd6f4,header:#89b4fa,info:#89b4fa,pointer:#f38ba8 \\
     --color=marker:#94e2d5,fg+:#cdd6f4,prompt:#f38ba8,hl+:#f38ba8 \\
@@ -138,10 +138,10 @@ set_theme_vars() {
             TMUX_MSG_CMD='set -g message-command-style "fg=#657b83,bg=#fdf6e3"'
             TMUX_PANE='set -g pane-border-style "fg=#93a1a1"'
             TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#268bd2"'
-            TMUX_STATUS='set -g status-style "fg=#657b83,bg=#eee8d5"'
-            TMUX_WIN='setw -g window-status-style "fg=#268bd2,bg=#eee8d5"'
-            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#eee8d5,bg=#268bd2"'
-            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#eee8d5,bg=#6c71c4"'
+            TMUX_STATUS='set -g status-style "fg=#657b83,bg=#fdf6e3"'
+            TMUX_WIN='setw -g window-status-style "fg=#268bd2,bg=#fdf6e3"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#fdf6e3,bg=#268bd2"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#fdf6e3,bg=#6c71c4"'
             FZF='    --color=bg+:#eee8d5,bg:#fdf6e3,spinner:#6c71c4,hl:#dc322f \\
     --color=fg:#657b83,header:#268bd2,info:#268bd2,pointer:#dc322f \\
     --color=marker:#2aa198,fg+:#586e75,prompt:#dc322f,hl+:#dc322f \\
@@ -157,10 +157,10 @@ set_theme_vars() {
             TMUX_MSG_CMD='set -g message-command-style "fg=#adadcc,bg=#121315"'
             TMUX_PANE='set -g pane-border-style "fg=#666a82"'
             TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#95b1fc"'
-            TMUX_STATUS='set -g status-style "fg=#adadcc,bg=#111111"'
-            TMUX_WIN='setw -g window-status-style "fg=#95b1fc,bg=#111111"'
-            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#111111,bg=#95b1fc"'
-            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#111111,bg=#a8a6f5"'
+            TMUX_STATUS='set -g status-style "fg=#adadcc,bg=#121315"'
+            TMUX_WIN='setw -g window-status-style "fg=#95b1fc,bg=#121315"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#121315,bg=#95b1fc"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#121315,bg=#a8a6f5"'
             FZF='    --color=bg+:#6C6B9B,bg:#121315,spinner:#a8a6f5,hl:#ba5f60 \\
     --color=fg:#adadcc,header:#95b1fc,info:#95b1fc,pointer:#ba5f60 \\
     --color=marker:#9bbdb8,fg+:#adadcc,prompt:#ba5f60,hl+:#ba5f60 \\
@@ -175,10 +175,10 @@ set_theme_vars() {
             TMUX_MSG_CMD='set -g message-command-style "fg=#A1A1AC,bg=#111111"'
             TMUX_PANE='set -g pane-border-style "fg=#4c4c57"'
             TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#858599"'
-            TMUX_STATUS='set -g status-style "fg=#A1A1AC,bg=#191919"'
-            TMUX_WIN='setw -g window-status-style "fg=#858599,bg=#191919"'
-            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#191919,bg=#858599"'
-            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#191919,bg=#817882"'
+            TMUX_STATUS='set -g status-style "fg=#A1A1AC,bg=#111111"'
+            TMUX_WIN='setw -g window-status-style "fg=#858599,bg=#111111"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#111111,bg=#858599"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#111111,bg=#817882"'
             FZF='    --color=bg+:#242424,bg:#111111,spinner:#817882,hl:#896956 \\
     --color=fg:#A1A1AC,header:#858599,info:#858599,pointer:#896956 \\
     --color=marker:#777d77,fg+:#A1A1AC,prompt:#896956,hl+:#896956 \\
@@ -193,10 +193,10 @@ set_theme_vars() {
             TMUX_MSG_CMD='set -g message-command-style "fg=#AEA09F,bg=#171614"'
             TMUX_PANE='set -g pane-border-style "fg=#68605F"'
             TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#808796"'
-            TMUX_STATUS='set -g status-style "fg=#AEA09F,bg=#1F1E1C"'
-            TMUX_WIN='setw -g window-status-style "fg=#808796,bg=#1F1E1C"'
-            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1F1E1C,bg=#808796"'
-            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1F1E1C,bg=#8a879c"'
+            TMUX_STATUS='set -g status-style "fg=#AEA09F,bg=#171614"'
+            TMUX_WIN='setw -g window-status-style "fg=#808796,bg=#171614"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#171614,bg=#808796"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#171614,bg=#8a879c"'
             FZF='    --color=bg+:#2A2927,bg:#171614,spinner:#8a879c,hl:#6E665E \\
     --color=fg:#AEA09F,header:#808796,info:#808796,pointer:#6E665E \\
     --color=marker:#717d6e,fg+:#AEA09F,prompt:#6E665E,hl+:#6E665E \\
@@ -211,10 +211,10 @@ set_theme_vars() {
             TMUX_MSG_CMD='set -g message-command-style "fg=#c6c8d1,bg=#161821"'
             TMUX_PANE='set -g pane-border-style "fg=#6b7089"'
             TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#84a0c6"'
-            TMUX_STATUS='set -g status-style "fg=#c6c8d1,bg=#1e2132"'
-            TMUX_WIN='setw -g window-status-style "fg=#84a0c6,bg=#1e2132"'
-            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1e2132,bg=#84a0c6"'
-            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1e2132,bg=#a093c7"'
+            TMUX_STATUS='set -g status-style "fg=#c6c8d1,bg=#161821"'
+            TMUX_WIN='setw -g window-status-style "fg=#84a0c6,bg=#161821"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#161821,bg=#84a0c6"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#161821,bg=#a093c7"'
             FZF='    --color=bg+:#6b7089,bg:#161821,spinner:#a093c7,hl:#e27878 \\
     --color=fg:#c6c8d1,header:#84a0c6,info:#84a0c6,pointer:#e27878 \\
     --color=marker:#89b8c2,fg+:#c6c8d1,prompt:#e27878,hl+:#e27878 \\
