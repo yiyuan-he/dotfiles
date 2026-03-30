@@ -143,6 +143,9 @@ require("lazy").setup({
           signs = { add = '+', change = '~', delete = '-' },
         },
       })
+
+      -- Surround (add/delete/replace surroundings)
+      require("mini.surround").setup()
     end,
   },
 
