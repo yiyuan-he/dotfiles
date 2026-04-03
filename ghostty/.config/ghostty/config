@@ -1,5 +1,5 @@
 # Font
-theme = "iceberg-dark"
+theme = "kanagawa-dragon"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 

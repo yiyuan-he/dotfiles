@@ -25,7 +25,7 @@ GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 MINIMAL_ZSH="$(resolve_path "$HOME/dotfiles/minimal_zsh")"
 
-SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light" "roseprime" "moon" "hojicha" "iceberg" "gruvbox")
+SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -240,6 +240,61 @@ set_theme_vars() {
     --color=border:#928374,label:#ebdbb2"'
             NVIM_SCHEME="gruvbox"
             ;;
+        wave)
+            GHOSTTY_THEME="kanagawa-wave"
+            TMUX_MODE='set -g mode-style "fg=#dcd7ba,bg=#2d4f67"'
+            TMUX_MSG='set -g message-style "fg=#dcd7ba,bg=#1f1f28"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#dcd7ba,bg=#1f1f28"'
+            TMUX_PANE='set -g pane-border-style "fg=#727169"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#7e9cd8"'
+            TMUX_STATUS='set -g status-style "fg=#dcd7ba,bg=#1f1f28"'
+            TMUX_WIN='setw -g window-status-style "fg=#7e9cd8,bg=#1f1f28"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#1f1f28,bg=#7e9cd8"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#1f1f28,bg=#957fb8"'
+            FZF='    --color=bg+:#2d4f67,bg:#1f1f28,spinner:#957fb8,hl:#c34043 \\
+    --color=fg:#dcd7ba,header:#7e9cd8,info:#7e9cd8,pointer:#c34043 \\
+    --color=marker:#6a9589,fg+:#dcd7ba,prompt:#c34043,hl+:#c34043 \\
+    --color=selected-bg:#2d4f67 \\
+    --color=border:#727169,label:#dcd7ba"'
+            NVIM_SCHEME="kanagawa-wave"
+            ;;
+        dragon)
+            GHOSTTY_THEME="kanagawa-dragon"
+            TMUX_MODE='set -g mode-style "fg=#c5c9c5,bg=#2d4f67"'
+            TMUX_MSG='set -g message-style "fg=#c5c9c5,bg=#181616"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#c5c9c5,bg=#181616"'
+            TMUX_PANE='set -g pane-border-style "fg=#625e5a"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#8ba4b0"'
+            TMUX_STATUS='set -g status-style "fg=#c5c9c5,bg=#181616"'
+            TMUX_WIN='setw -g window-status-style "fg=#8ba4b0,bg=#181616"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#181616,bg=#8ba4b0"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#181616,bg=#a292a3"'
+            FZF='    --color=bg+:#2d4f67,bg:#181616,spinner:#a292a3,hl:#c4746e \\
+    --color=fg:#c5c9c5,header:#8ba4b0,info:#8ba4b0,pointer:#c4746e \\
+    --color=marker:#8ea4a2,fg+:#c5c9c5,prompt:#c4746e,hl+:#c4746e \\
+    --color=selected-bg:#2d4f67 \\
+    --color=border:#625e5a,label:#c5c9c5"'
+            NVIM_SCHEME="kanagawa-dragon"
+            ;;
+        lotus)
+            GHOSTTY_THEME="kanagawa-lotus"
+            TMUX_MODE='set -g mode-style "fg=#545464,bg=#c9c6a5"'
+            TMUX_MSG='set -g message-style "fg=#545464,bg=#f2ecbc"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#545464,bg=#f2ecbc"'
+            TMUX_PANE='set -g pane-border-style "fg=#8a8980"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#4d699b"'
+            TMUX_STATUS='set -g status-style "fg=#545464,bg=#f2ecbc"'
+            TMUX_WIN='setw -g window-status-style "fg=#4d699b,bg=#f2ecbc"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#f2ecbc,bg=#4d699b"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#f2ecbc,bg=#b35b79"'
+            FZF='    --color=bg+:#c9c6a5,bg:#f2ecbc,spinner:#b35b79,hl:#c84053 \\
+    --color=fg:#545464,header:#4d699b,info:#4d699b,pointer:#c84053 \\
+    --color=marker:#597b75,fg+:#43436c,prompt:#c84053,hl+:#c84053 \\
+    --color=selected-bg:#c9c6a5 \\
+    --color=border:#8a8980,label:#545464"'
+            NVIM_SCHEME="kanagawa-lotus"
+            NVIM_BG="light"
+            ;;
         *)
             usage
             ;;
@@ -262,6 +317,7 @@ switch_theme() {
             sed -i '' '1a\
 theme = "'"$GHOSTTY_THEME"'"' "$GHOSTTY_CONF"
         fi
+
         echo "Updated Ghostty config"
     fi
 
