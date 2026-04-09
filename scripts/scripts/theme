@@ -48,12 +48,12 @@ set_theme_vars() {
             TMUX_PANE='set -g pane-border-style "fg=#a1a6c5"'
             TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#2e7de9"'
             TMUX_STATUS='set -g status-style "fg=#3760bf,bg=#e1e2e7"'
-            TMUX_WIN='setw -g window-status-style "fg=#2e7de9,bg=#e1e2e7"'
-            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#e1e2e7,bg=#2e7de9"'
-            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#e1e2e7,bg=#9854f1"'
-            FZF='    --color=bg+:#b7c1e3,bg:#e1e2e7,spinner:#9854f1,hl:#f52a65 \\
-    --color=fg:#3760bf,header:#2e7de9,info:#2e7de9,pointer:#f52a65 \\
-    --color=marker:#007197,fg+:#3760bf,prompt:#f52a65,hl+:#f52a65 \\
+            TMUX_WIN='setw -g window-status-style "fg=#3760bf,bg=#e1e2e7"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#e1e2e7,bg=#3760bf"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#e1e2e7,bg=#7847bd"'
+            FZF='    --color=bg+:#b7c1e3,bg:#e1e2e7,spinner:#9854f1,hl:#c64343 \\
+    --color=fg:#3760bf,header:#2e7de9,info:#2e7de9,pointer:#c64343 \\
+    --color=marker:#007197,fg+:#3760bf,prompt:#c64343,hl+:#c64343 \\
     --color=selected-bg:#b7c1e3 \\
     --color=border:#a1a6c5,label:#3760bf"'
             NVIM_SCHEME="tokyonight-day"

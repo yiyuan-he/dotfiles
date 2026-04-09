@@ -1,5 +1,5 @@
 # Font
-theme = "kanagawa-dragon"
+theme = "tokyonight-day"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 
