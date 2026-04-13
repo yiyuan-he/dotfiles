@@ -25,7 +25,7 @@ GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 MINIMAL_ZSH="$(resolve_path "$HOME/dotfiles/minimal_zsh")"
 
-SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
+SCHEMES=("tokyonight-day" "tokyonight-moon" "material-oceanic" "one-half-dark" "catppuccin-mocha" "solarized-light" "github-light" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -148,6 +148,25 @@ set_theme_vars() {
     --color=selected-bg:#eee8d5 \\
     --color=border:#93a1a1,label:#657b83"'
             NVIM_SCHEME="solarized"
+            NVIM_BG="light"
+            ;;
+        github-light)
+            GHOSTTY_THEME="github-light"
+            TMUX_MODE='set -g mode-style "fg=#1f2328,bg=#ddf4ff"'
+            TMUX_MSG='set -g message-style "fg=#1f2328,bg=#ffffff"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#1f2328,bg=#ffffff"'
+            TMUX_PANE='set -g pane-border-style "fg=#d0d7de"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#0969da"'
+            TMUX_STATUS='set -g status-style "fg=#1f2328,bg=#f6f8fa"'
+            TMUX_WIN='setw -g window-status-style "fg=#0969da,bg=#f6f8fa"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#ffffff,bg=#0969da"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#ffffff,bg=#8250df"'
+            FZF='    --color=bg+:#ddf4ff,bg:#ffffff,spinner:#8250df,hl:#cf222e \\
+    --color=fg:#1f2328,header:#0969da,info:#0969da,pointer:#cf222e \\
+    --color=marker:#1b7c83,fg+:#1f2328,prompt:#cf222e,hl+:#cf222e \\
+    --color=selected-bg:#ddf4ff \\
+    --color=border:#d0d7de,label:#1f2328"'
+            NVIM_SCHEME="github_light"
             NVIM_BG="light"
             ;;
         roseprime)

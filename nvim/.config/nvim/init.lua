@@ -189,6 +189,7 @@ require("lazy").setup({
   { "marko-cerovac/material.nvim", lazy = false, priority = 1000, opts = { disable = { colored_cursor = true } } },
   { "casedami/neomodern.nvim", lazy = false, priority = 1000, opts = {} },
   { "rebelot/kanagawa.nvim", lazy = false, priority = 1000, opts = {} },
+  { "projekt0n/github-nvim-theme", lazy = false, priority = 1000 },
   {
     "maxmx03/solarized.nvim",
     lazy = false,
@@ -202,7 +203,7 @@ require("lazy").setup({
 -- ============================================================================
 vim.g.material_style = "oceanic"
 vim.o.background = "light"
-vim.cmd.colorscheme("tokyonight-day")
+vim.cmd.colorscheme("github_light")
 
 -- ============================================================================
 -- Keymaps
