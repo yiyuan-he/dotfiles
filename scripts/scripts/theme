@@ -157,8 +157,8 @@ set_theme_vars() {
             TMUX_MSG_CMD='set -g message-command-style "fg=#1f2328,bg=#ffffff"'
             TMUX_PANE='set -g pane-border-style "fg=#d0d7de"'
             TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#0969da"'
-            TMUX_STATUS='set -g status-style "fg=#1f2328,bg=#f6f8fa"'
-            TMUX_WIN='setw -g window-status-style "fg=#0969da,bg=#f6f8fa"'
+            TMUX_STATUS='set -g status-style "fg=#1f2328,bg=#ffffff"'
+            TMUX_WIN='setw -g window-status-style "fg=#0969da,bg=#ffffff"'
             TMUX_WIN_CUR='setw -g window-status-current-style "fg=#ffffff,bg=#0969da"'
             TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#ffffff,bg=#8250df"'
             FZF='    --color=bg+:#ddf4ff,bg:#ffffff,spinner:#8250df,hl:#cf222e \\
