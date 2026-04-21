@@ -35,5 +35,5 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 eval "$(starship init zsh)"
-eval "$(/Users/yiyuanh/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
 eval "$(zoxide init zsh)"
