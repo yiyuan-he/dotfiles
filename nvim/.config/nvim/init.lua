@@ -218,6 +218,12 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highl
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Next quickfix" })
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix" })
 
+-- Split navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left split" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower split" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper split" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
+
 -- ============================================================================
 -- Autocommands
 -- ============================================================================
