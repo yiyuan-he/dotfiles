@@ -117,18 +117,18 @@ require("lazy").setup({
     version = false,
     config = function()
       -- Auto-pairs
-      require("mini.pairs").setup({
-        modes = { insert = true, command = true, terminal = false },
-        skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-        skip_ts = { "string" },
-        skip_unbalanced = true,
-        markdown = true,
-        mappings = {
-          ['"'] = false,
-          ["'"] = false,
-          ['`'] = false,
-        },
-      })
+      -- require("mini.pairs").setup({
+      --   modes = { insert = true, command = true, terminal = false },
+      --   skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+      --   skip_ts = { "string" },
+      --   skip_unbalanced = true,
+      --   markdown = true,
+      --   mappings = {
+      --     ['"'] = false,
+      --     ["'"] = false,
+      --     ['`'] = false,
+      --   },
+      -- })
 
       -- Indent scope
       require("mini.indentscope").setup({
