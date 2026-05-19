@@ -1,4 +1,5 @@
 # Font
+theme = "github-light"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 

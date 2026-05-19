@@ -202,8 +202,8 @@ require("lazy").setup({
 -- Colorscheme
 -- ============================================================================
 vim.g.material_style = "oceanic"
-vim.o.background = "dark"
-vim.cmd.colorscheme("onedark")
+vim.o.background = "light"
+vim.cmd.colorscheme("github_light")
 
 -- ============================================================================
 -- Keymaps
