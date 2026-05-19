@@ -18,7 +18,3 @@ vimcmd_symbol = "[λ](green)"
 [git_branch]
 format = "[$branch]($style)"
 style = "bright-black"
-
-[cmd_duration]
-format = "[$duration]($style) "
-style = "yellow"
