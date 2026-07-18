@@ -203,7 +203,7 @@ require("lazy").setup({
 -- ============================================================================
 vim.g.material_style = "oceanic"
 vim.o.background = "light"
-vim.cmd.colorscheme("github_light")
+vim.cmd.colorscheme("solarized")
 
 -- ============================================================================
 -- Keymaps

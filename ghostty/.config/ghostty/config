@@ -1,5 +1,5 @@
 # Font
-theme = "github-light"
+theme = "iTerm2 Solarized Light"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 
