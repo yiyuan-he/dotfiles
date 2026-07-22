@@ -1,5 +1,5 @@
 # Font
-theme = "iTerm2 Solarized Light"
+theme = "Nord"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 
