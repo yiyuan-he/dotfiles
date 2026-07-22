@@ -1,5 +1,5 @@
 # Font
-theme = "Nord"
+theme = "seoul256-dark"
 font-family = "Berkeley Mono"
 keybind = shift+enter=text:\n
 
