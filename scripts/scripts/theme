@@ -25,7 +25,7 @@ GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 MINIMAL_ZSH="$(resolve_path "$HOME/dotfiles/minimal_zsh")"
 
-SCHEMES=("tokyonight-day" "tokyonight-night" "tokyonight-moon" "material-oceanic" "one-half-dark" "nord" "catppuccin-mocha" "solarized-light" "github-light" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
+SCHEMES=("tokyonight-day" "tokyonight-night" "tokyonight-moon" "material-oceanic" "one-half-dark" "nord" "catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha" "seoul256-dark" "seoul256-light" "solarized-light" "github-light" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -149,6 +149,61 @@ set_theme_vars() {
     --color=border:#4c566a,label:#d8dee9"'
             NVIM_SCHEME="nord"
             ;;
+        catppuccin-latte)
+            GHOSTTY_THEME="catppuccin-latte"
+            TMUX_MODE='set -g mode-style "fg=#4c4f69,bg=#acb0be"'
+            TMUX_MSG='set -g message-style "fg=#4c4f69,bg=#eff1f5"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#4c4f69,bg=#eff1f5"'
+            TMUX_PANE='set -g pane-border-style "fg=#9ca0b0"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#1e66f5"'
+            TMUX_STATUS='set -g status-style "fg=#4c4f69,bg=#eff1f5"'
+            TMUX_WIN='setw -g window-status-style "fg=#1e66f5,bg=#eff1f5"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#eff1f5,bg=#1e66f5"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#eff1f5,bg=#8839ef"'
+            FZF='    --color=bg+:#acb0be,bg:#eff1f5,spinner:#8839ef,hl:#d20f39 \\
+    --color=fg:#4c4f69,header:#1e66f5,info:#1e66f5,pointer:#d20f39 \\
+    --color=marker:#179299,fg+:#4c4f69,prompt:#d20f39,hl+:#d20f39 \\
+    --color=selected-bg:#acb0be \\
+    --color=border:#9ca0b0,label:#4c4f69"'
+            NVIM_SCHEME="catppuccin-latte"
+            NVIM_BG="light"
+            ;;
+        catppuccin-frappe)
+            GHOSTTY_THEME="Catppuccin Frappe"
+            TMUX_MODE='set -g mode-style "fg=#c6d0f5,bg=#626880"'
+            TMUX_MSG='set -g message-style "fg=#c6d0f5,bg=#303446"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#c6d0f5,bg=#303446"'
+            TMUX_PANE='set -g pane-border-style "fg=#737994"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#8caaee"'
+            TMUX_STATUS='set -g status-style "fg=#c6d0f5,bg=#303446"'
+            TMUX_WIN='setw -g window-status-style "fg=#8caaee,bg=#303446"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#303446,bg=#8caaee"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#303446,bg=#ca9ee6"'
+            FZF='    --color=bg+:#626880,bg:#303446,spinner:#ca9ee6,hl:#e78284 \\
+    --color=fg:#c6d0f5,header:#8caaee,info:#8caaee,pointer:#e78284 \\
+    --color=marker:#81c8be,fg+:#c6d0f5,prompt:#e78284,hl+:#e78284 \\
+    --color=selected-bg:#626880 \\
+    --color=border:#737994,label:#c6d0f5"'
+            NVIM_SCHEME="catppuccin-frappe"
+            ;;
+        catppuccin-macchiato)
+            GHOSTTY_THEME="Catppuccin Macchiato"
+            TMUX_MODE='set -g mode-style "fg=#cad3f5,bg=#5b6078"'
+            TMUX_MSG='set -g message-style "fg=#cad3f5,bg=#24273a"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#cad3f5,bg=#24273a"'
+            TMUX_PANE='set -g pane-border-style "fg=#6e738d"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#8aadf4"'
+            TMUX_STATUS='set -g status-style "fg=#cad3f5,bg=#24273a"'
+            TMUX_WIN='setw -g window-status-style "fg=#8aadf4,bg=#24273a"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#24273a,bg=#8aadf4"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#24273a,bg=#c6a0f6"'
+            FZF='    --color=bg+:#5b6078,bg:#24273a,spinner:#c6a0f6,hl:#ed8796 \\
+    --color=fg:#cad3f5,header:#8aadf4,info:#8aadf4,pointer:#ed8796 \\
+    --color=marker:#8bd5ca,fg+:#cad3f5,prompt:#ed8796,hl+:#ed8796 \\
+    --color=selected-bg:#5b6078 \\
+    --color=border:#6e738d,label:#cad3f5"'
+            NVIM_SCHEME="catppuccin-macchiato"
+            ;;
         catppuccin-mocha)
             GHOSTTY_THEME="catppuccin-mocha"
             TMUX_MODE='set -g mode-style "fg=#cdd6f4,bg=#585b70"'
@@ -166,6 +221,43 @@ set_theme_vars() {
     --color=selected-bg:#585b70 \\
     --color=border:#6c7086,label:#cdd6f4"'
             NVIM_SCHEME="catppuccin-mocha"
+            ;;
+        seoul256-dark)
+            GHOSTTY_THEME="seoul256-dark"
+            TMUX_MODE='set -g mode-style "fg=#d0d0d0,bg=#005f5f"'
+            TMUX_MSG='set -g message-style "fg=#d0d0d0,bg=#3a3a3a"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#d0d0d0,bg=#3a3a3a"'
+            TMUX_PANE='set -g pane-border-style "fg=#626262"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#87afd7"'
+            TMUX_STATUS='set -g status-style "fg=#d0d0d0,bg=#3a3a3a"'
+            TMUX_WIN='setw -g window-status-style "fg=#87afd7,bg=#3a3a3a"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#3a3a3a,bg=#87afd7"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#3a3a3a,bg=#d75f87"'
+            FZF='    --color=bg+:#005f5f,bg:#3a3a3a,spinner:#d7afaf,hl:#d75f87 \\
+    --color=fg:#d0d0d0,header:#87afd7,info:#87afd7,pointer:#d75f87 \\
+    --color=marker:#87afaf,fg+:#d0d0d0,prompt:#d75f87,hl+:#d75f87 \\
+    --color=selected-bg:#005f5f \\
+    --color=border:#626262,label:#d0d0d0"'
+            NVIM_SCHEME="seoul256"
+            ;;
+        seoul256-light)
+            GHOSTTY_THEME="seoul256-light"
+            TMUX_MODE='set -g mode-style "fg=#4e4e4e,bg=#afd7d7"'
+            TMUX_MSG='set -g message-style "fg=#4e4e4e,bg=#dadada"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#4e4e4e,bg=#dadada"'
+            TMUX_PANE='set -g pane-border-style "fg=#bcbcbc"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#0087af"'
+            TMUX_STATUS='set -g status-style "fg=#4e4e4e,bg=#dadada"'
+            TMUX_WIN='setw -g window-status-style "fg=#0087af,bg=#dadada"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#dadada,bg=#0087af"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#dadada,bg=#875f87"'
+            FZF='    --color=bg+:#afd7d7,bg:#dadada,spinner:#875f87,hl:#af5f5f \\
+    --color=fg:#4e4e4e,header:#0087af,info:#0087af,pointer:#af5f5f \\
+    --color=marker:#008787,fg+:#4e4e4e,prompt:#af5f5f,hl+:#af5f5f \\
+    --color=selected-bg:#afd7d7 \\
+    --color=border:#bcbcbc,label:#4e4e4e"'
+            NVIM_SCHEME="seoul256-light"
+            NVIM_BG="light"
             ;;
         solarized-light)
             GHOSTTY_THEME="iTerm2 Solarized Light"

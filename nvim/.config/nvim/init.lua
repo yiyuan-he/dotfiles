@@ -191,6 +191,7 @@ require("lazy").setup({
   { "casedami/neomodern.nvim", lazy = false, priority = 1000, opts = {} },
   { "rebelot/kanagawa.nvim", lazy = false, priority = 1000, opts = {} },
   { "projekt0n/github-nvim-theme", lazy = false, priority = 1000 },
+  { "junegunn/seoul256.vim", lazy = false, priority = 1000 },
   {
     "maxmx03/solarized.nvim",
     lazy = false,
@@ -203,6 +204,7 @@ require("lazy").setup({
 -- Colorscheme
 -- ============================================================================
 vim.g.material_style = "oceanic"
+vim.g.seoul256_srgb = 1 -- use standard xterm hex values so bg matches terminal
 vim.o.background = "dark"
 vim.cmd.colorscheme("nord")
 
