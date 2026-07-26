@@ -25,7 +25,7 @@ GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 MINIMAL_ZSH="$(resolve_path "$HOME/dotfiles/minimal_zsh")"
 
-SCHEMES=("tokyonight-day" "tokyonight-night" "tokyonight-moon" "material-oceanic" "one-half-dark" "nord" "catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha" "seoul256-dark" "seoul256-light" "solarized-light" "github-light" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
+SCHEMES=("tokyonight-day" "tokyonight-night" "tokyonight-moon" "material-oceanic" "one-half-dark" "nord" "catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha" "seoul256-dark" "seoul256-light" "solarized-light" "github-light" "modus-operandi" "modus-operandi-tinted" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -39,6 +39,7 @@ usage() {
 
 set_theme_vars() {
     NVIM_BG="dark"
+    NVIM_MODUS_VARIANT=""
     case "$1" in
         tokyonight-day)
             GHOSTTY_THEME="tokyonight-day"
@@ -297,6 +298,46 @@ set_theme_vars() {
             NVIM_SCHEME="github_light"
             NVIM_BG="light"
             ;;
+        modus-operandi)
+            GHOSTTY_THEME="Modus Operandi"
+            TMUX_MODE='set -g mode-style "fg=#000000,bg=#bdbdbd"'
+            TMUX_MSG='set -g message-style "fg=#000000,bg=#ffffff"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#000000,bg=#ffffff"'
+            TMUX_PANE='set -g pane-border-style "fg=#a6a6a6"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#0031a9"'
+            TMUX_STATUS='set -g status-style "fg=#000000,bg=#ffffff"'
+            TMUX_WIN='setw -g window-status-style "fg=#0031a9,bg=#ffffff"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#ffffff,bg=#0031a9"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#ffffff,bg=#721045"'
+            FZF='    --color=bg+:#bdbdbd,bg:#ffffff,spinner:#721045,hl:#a60000 \\
+    --color=fg:#000000,header:#0031a9,info:#005e8b,pointer:#a60000 \\
+    --color=marker:#006800,fg+:#000000,prompt:#a60000,hl+:#a60000 \\
+    --color=selected-bg:#bdbdbd \\
+    --color=border:#a6a6a6,label:#000000"'
+            NVIM_SCHEME="modus"
+            NVIM_BG="light"
+            NVIM_MODUS_VARIANT="default"
+            ;;
+        modus-operandi-tinted)
+            GHOSTTY_THEME="Modus Operandi Tinted"
+            TMUX_MODE='set -g mode-style "fg=#000000,bg=#c2bcb5"'
+            TMUX_MSG='set -g message-style "fg=#000000,bg=#fbf7f0"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#000000,bg=#fbf7f0"'
+            TMUX_PANE='set -g pane-border-style "fg=#a6a6a6"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#0031a9"'
+            TMUX_STATUS='set -g status-style "fg=#000000,bg=#fbf7f0"'
+            TMUX_WIN='setw -g window-status-style "fg=#0031a9,bg=#fbf7f0"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#fbf7f0,bg=#0031a9"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#fbf7f0,bg=#721045"'
+            FZF='    --color=bg+:#c2bcb5,bg:#fbf7f0,spinner:#721045,hl:#a60000 \\
+    --color=fg:#000000,header:#0031a9,info:#005e8b,pointer:#a60000 \\
+    --color=marker:#006800,fg+:#000000,prompt:#a60000,hl+:#a60000 \\
+    --color=selected-bg:#c2bcb5 \\
+    --color=border:#a6a6a6,label:#000000"'
+            NVIM_SCHEME="modus"
+            NVIM_BG="light"
+            NVIM_MODUS_VARIANT="tinted"
+            ;;
         roseprime)
             GHOSTTY_THEME="roseprime"
             TMUX_MODE='set -g mode-style "fg=#adadcc,bg=#6C6B9B"'
@@ -504,6 +545,9 @@ theme = "'"$GHOSTTY_THEME"'"' "$GHOSTTY_CONF"
     # Update nvim colorscheme
     if [[ -f "$NVIM_INIT" ]]; then
         sed -i '' 's/vim\.o\.background = "[^"]*"/vim.o.background = "'"$NVIM_BG"'"/' "$NVIM_INIT"
+        if [[ -n "$NVIM_MODUS_VARIANT" ]]; then
+            sed -i '' 's/modus_operandi = "[^"]*"/modus_operandi = "'"$NVIM_MODUS_VARIANT"'"/' "$NVIM_INIT"
+        fi
         sed -i '' 's/vim\.cmd\.colorscheme("[^"]*")/vim.cmd.colorscheme("'"$NVIM_SCHEME"'")/' "$NVIM_INIT"
         echo "Updated nvim colorscheme"
     fi

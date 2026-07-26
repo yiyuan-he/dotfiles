@@ -193,6 +193,17 @@ require("lazy").setup({
   { "projekt0n/github-nvim-theme", lazy = false, priority = 1000 },
   { "junegunn/seoul256.vim", lazy = false, priority = 1000 },
   {
+    "miikanissi/modus-themes.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "modus_operandi",
+      variants = { modus_operandi = "tinted" },
+      transparent = false,
+      styles = { comments = {}, keywords = {} },
+    },
+  },
+  {
     "maxmx03/solarized.nvim",
     lazy = false,
     priority = 1000,
@@ -205,8 +216,8 @@ require("lazy").setup({
 -- ============================================================================
 vim.g.material_style = "oceanic"
 vim.g.seoul256_srgb = 1 -- use standard xterm hex values so bg matches terminal
-vim.o.background = "dark"
-vim.cmd.colorscheme("seoul256")
+vim.o.background = "light"
+vim.cmd.colorscheme("modus")
 
 -- ============================================================================
 -- Keymaps
