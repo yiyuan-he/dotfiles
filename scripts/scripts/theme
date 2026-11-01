@@ -25,7 +25,7 @@ GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 MINIMAL_ZSH="$(resolve_path "$HOME/dotfiles/minimal_zsh")"
 
-SCHEMES=("tokyonight-day" "tokyonight-night" "tokyonight-moon" "material-oceanic" "one-half-dark" "nord" "catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha" "seoul256-dark" "seoul256-light" "solarized-light" "github-light" "merino-light" "modus-operandi" "modus-operandi-tinted" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
+SCHEMES=("tokyonight-day" "tokyonight-night" "tokyonight-moon" "material-oceanic" "one-half-dark" "nord" "catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha" "seoul256-dark" "seoul256-light" "solarized-light" "github-light" "merino-light" "merino-dark" "modus-operandi" "modus-operandi-tinted" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
 
 usage() {
     echo "Usage: theme <colorscheme>"
@@ -316,6 +316,24 @@ set_theme_vars() {
     --color=border:#8c959f,label:#1f2328"'
             NVIM_SCHEME="github_light"
             NVIM_BG="light"
+            ;;
+        merino-dark)
+            GHOSTTY_THEME="merino-dark"
+            TMUX_MODE='set -g mode-style "fg=#e6edf3,bg=#1e4273"'
+            TMUX_MSG='set -g message-style "fg=#e6edf3,bg=#0d1117"'
+            TMUX_MSG_CMD='set -g message-command-style "fg=#e6edf3,bg=#0d1117"'
+            TMUX_PANE='set -g pane-border-style "fg=#484f58"'
+            TMUX_PANE_ACTIVE='set -g pane-active-border-style "fg=#58a6ff"'
+            TMUX_STATUS='set -g status-style "fg=#e6edf3,bg=#0d1117"'
+            TMUX_WIN='setw -g window-status-style "fg=#58a6ff,bg=#0d1117"'
+            TMUX_WIN_CUR='setw -g window-status-current-style "fg=#0d1117,bg=#58a6ff"'
+            TMUX_WIN_ACT='setw -g window-status-activity-style "fg=#0d1117,bg=#bc8cff"'
+            FZF='    --color=bg+:#1e4273,bg:#0d1117,spinner:#bc8cff,hl:#ff7b72 \\
+    --color=fg:#e6edf3,header:#58a6ff,info:#58a6ff,pointer:#ff7b72 \\
+    --color=marker:#39c5cf,fg+:#e6edf3,prompt:#ff7b72,hl+:#ff7b72 \\
+    --color=selected-bg:#1e4273 \\
+    --color=border:#484f58,label:#e6edf3"'
+            NVIM_SCHEME="github_dark_default"
             ;;
         modus-operandi)
             GHOSTTY_THEME="Modus Operandi"

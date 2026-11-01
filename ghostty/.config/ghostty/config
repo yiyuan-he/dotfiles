@@ -1,5 +1,5 @@
 # Font
-theme = "Modus Operandi Tinted"
+theme = "merino-light"
 font-family = "0xProto"
 keybind = shift+enter=text:\n
 
