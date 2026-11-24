@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Theme switcher for multiple colorschemes
-# Updates: Ghostty, tmux, FZF (zshrc), nvim, and Rex
+# Updates: Ghostty, tmux, FZF (zshrc), nvim, Rex, and Hunk
 
 # Resolve symlinks (macOS sed -i doesn't work on symlinks)
 resolve_path() {
@@ -24,6 +24,7 @@ TMUX_CONF="$(resolve_path "$HOME/.tmux.conf")"
 GHOSTTY_CONF="$(resolve_path "$HOME/.config/ghostty/config")"
 NVIM_INIT="$(resolve_path "$HOME/.config/nvim/init.lua")"
 MINIMAL_ZSH="$(resolve_path "$HOME/dotfiles/minimal_zsh")"
+HUNK_CONF="$(resolve_path "${XDG_CONFIG_HOME:-$HOME/.config}/hunk/config.toml")"
 
 SCHEMES=("tokyonight-day" "tokyonight-night" "tokyonight-moon" "material-oceanic" "one-half-dark" "nord" "catppuccin-latte" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha" "seoul256-dark" "seoul256-light" "solarized-light" "github-light" "merino-light" "merino-dark" "modus-operandi" "modus-operandi-tinted" "roseprime" "moon" "hojicha" "iceberg" "gruvbox" "wave" "dragon" "lotus")
 
@@ -526,6 +527,85 @@ set_theme_vars() {
     esac
 }
 
+update_hunk_theme() {
+    local hunk_theme theme_definition=""
+    case "$1" in
+        nord|catppuccin-*|solarized-light) hunk_theme="$1" ;;
+        tokyonight-night|tokyonight-moon) hunk_theme="tokyo-night" ;;
+        material-oceanic) hunk_theme="material-theme-ocean" ;;
+        one-half-dark) hunk_theme="one-dark-pro" ;;
+        roseprime) hunk_theme="rose-pine" ;;
+        moon) hunk_theme="rose-pine-moon" ;;
+        gruvbox) hunk_theme="gruvbox-dark-medium" ;;
+        wave|dragon|lotus) hunk_theme="kanagawa-$1" ;;
+        iceberg)
+            hunk_theme="dotfiles-iceberg"
+            # Iceberg syntax colors with surfaces matched to the Codex pane.
+            theme_definition="$(cat <<'EOF'
+[themes.dotfiles-iceberg]
+label = "Iceberg"
+base = "nord"
+background = "#13141b"
+panel = "#13141b"
+panelAlt = "#272a32"
+border = "#353740"
+text = "#c6c8d1"
+muted = "#a2a6b7"
+accent = "#84a0c6"
+accentMuted = "#283348"
+contextBg = "#13141b"
+contextContentBg = "#13141b"
+lineNumberBg = "#13141b"
+lineNumberFg = "#8990ab"
+selectedHunk = "#2e3037"
+addedBg = "#1c2f26"
+addedContentBg = "#2c4235"
+addedSignColor = "#b4be82"
+badgeAdded = "#b4be82"
+removedBg = "#3a1e1c"
+removedContentBg = "#542c29"
+removedSignColor = "#e27878"
+badgeRemoved = "#e27878"
+
+[themes.dotfiles-iceberg.syntax_scopes]
+"comment" = "#a2a6b7"
+"entity.name.tag" = "#84a0c6"
+"keyword" = "#a093c7"
+"string" = "#b4be82"
+"constant.numeric" = "#e2a478"
+"constant.language" = "#89b8c2"
+EOF
+)"
+            ;;
+        *) hunk_theme="github-$NVIM_BG-default" ;;
+    esac
+
+    if [[ ! -f "$HUNK_CONF" ]]; then
+        command -v hunk >/dev/null 2>&1 || return
+        mkdir -p "$(dirname "$HUNK_CONF")" && touch "$HUNK_CONF" || return
+    fi
+
+    # Refresh the tables owned by the switcher so existing installs get palette updates.
+    HUNK_THEME="$hunk_theme" HUNK_THEME_DEFINITION="$theme_definition" perl -i -0777 -pe '
+        BEGIN { $setting = qq(theme = "$ENV{HUNK_THEME}") }
+        ($root, $tables) = split /(?=^[ \t]*\[)/m, $_, 2;
+        if ($root !~ s/^[ \t]*(?:theme|"theme"|\x27theme\x27)[ \t]*=[ \t]*(?:"(?:[^"\\\r\n]|\\.)*"|\x27[^\x27\r\n]*\x27)/$setting/m) {
+            $root = "$setting\n" . $root;
+        }
+        $_ = $root . ($tables // "");
+        for my $table (split /\n\n/, $ENV{HUNK_THEME_DEFINITION}) {
+            my ($header) = split /\n/, $table, 2;
+            if (!s/^[ \t]*\Q$header\E[^\r\n]*\r?\n.*?
+                (?=(?:^[ \t]*(?:\#[^\r\n]*)?\r?\n)*(?:^[ \t]*\[|\z))/$table\n/msx) {
+                $_ .= "\n" unless /\n\z/;
+                $_ .= "\n" unless /\n\n\z/;
+                $_ .= "$table\n";
+            }
+        }
+    ' "$HUNK_CONF" || return
+    echo "Updated Hunk theme: $hunk_theme"
+}
+
 update_rex_theme() {
     local name="${GHOSTTY_THEME:-One Half Dark}"
     local error selection_error theme_dir
@@ -623,6 +703,7 @@ theme = "'"$GHOSTTY_THEME"'"' "$GHOSTTY_CONF"
         echo "Updated nvim colorscheme"
     fi
 
+    update_hunk_theme "$scheme"
     update_rex_theme
 
     echo ""
