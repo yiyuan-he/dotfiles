@@ -216,8 +216,8 @@ require("lazy").setup({
 -- ============================================================================
 vim.g.material_style = "oceanic"
 vim.g.seoul256_srgb = 1 -- use standard xterm hex values so bg matches terminal
-vim.o.background = "light"
-vim.cmd.colorscheme("github_light")
+vim.o.background = "dark"
+vim.cmd.colorscheme("iceberg")
 
 -- ============================================================================
 -- Keymaps

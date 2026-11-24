@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Theme switcher for multiple colorschemes
-# Updates: Ghostty, tmux, FZF (zshrc), and nvim
+# Updates: Ghostty, tmux, FZF (zshrc), nvim, and Rex
 
 # Resolve symlinks (macOS sed -i doesn't work on symlinks)
 resolve_path() {
@@ -526,6 +526,40 @@ set_theme_vars() {
     esac
 }
 
+update_rex_theme() {
+    local name="${GHOSTTY_THEME:-One Half Dark}"
+    local error selection_error theme_dir
+    local -a rex_do=(rex --autostart=false --timeout 5s do)
+
+    if ! command -v rex >/dev/null 2>&1; then
+        echo "Rex theme skipped: rex CLI unavailable" >&2
+        return
+    fi
+
+    if ! error=$("${rex_do[@]}" client.appearance.switch_mode "mode=$NVIM_BG" 2>&1); then
+        printf 'Rex theme skipped: %s\n' "$error" >&2
+        return
+    fi
+
+    # Import only when Rex cannot select the palette by name.
+    if ! selection_error=$("${rex_do[@]}" client.theme.change "name=$name" 2>&1); then
+        for theme_dir in "${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/themes" \
+            "/Applications/Ghostty.app/Contents/Resources/ghostty/themes"; do
+            if [[ -f "$theme_dir/$name" ]]; then
+                if ! error=$("${rex_do[@]}" client.theme.import "path=$theme_dir/$name" 2>&1); then
+                    printf 'Rex theme import failed: %s\n' "$error" >&2
+                    return
+                fi
+                echo "Imported Rex theme: $name"
+                return
+            fi
+        done
+        printf 'Rex theme skipped: no Ghostty palette file for %s (%s)\n' "$name" "$selection_error" >&2
+        return
+    fi
+    echo "Updated Rex theme: $name"
+}
+
 switch_theme() {
     local scheme=$1
     set_theme_vars "$scheme"
@@ -588,6 +622,8 @@ theme = "'"$GHOSTTY_THEME"'"' "$GHOSTTY_CONF"
         sed -i '' 's/vim\.cmd\.colorscheme("[^"]*")/vim.cmd.colorscheme("'"$NVIM_SCHEME"'")/' "$NVIM_INIT"
         echo "Updated nvim colorscheme"
     fi
+
+    update_rex_theme
 
     echo ""
     echo "Theme switched to: $scheme"

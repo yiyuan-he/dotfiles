@@ -1,5 +1,5 @@
 # Font
-theme = "merino-light"
+theme = "iceberg-dark"
 font-family = "0xProto"
 keybind = shift+enter=text:\n
 
