@@ -527,19 +527,131 @@ set_theme_vars() {
     esac
 }
 
+ghostty_palette_path() {
+    local theme_dir
+    for theme_dir in "${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/themes" \
+        "/Applications/Ghostty.app/Contents/Resources/ghostty/themes"; do
+        if [[ -f "$theme_dir/$1" ]]; then
+            printf '%s\n' "$theme_dir/$1"
+            return
+        fi
+    done
+    return 1
+}
+
+generate_hunk_palette() {
+    local palette
+    palette=$(ghostty_palette_path "${GHOSTTY_THEME:-One Half Dark}") || palette=/dev/null
+    perl -e '
+        use strict;
+        use warnings;
+        my ($id, $label, $mode, $fzf, $palette) = @ARGV;
+        my %fzf = $fzf =~ /([\w+-]+):(\#[0-9a-f]{6})/gi;
+        open my $file, "<", $palette or die "Cannot read $palette: $!";
+        my (%terminal, %ansi);
+        while (<$file>) {
+            if (/^\s*(background|foreground)\s*=\s*(\#[0-9a-f]{6})\b/i) {
+                $terminal{$1} = $2;
+            } elsif (/^\s*palette\s*=\s*(\d+)\s*=\s*(\#[0-9a-f]{6})\b/i) {
+                $ansi{$1} = $2;
+            }
+        }
+
+        sub mix {
+            my ($from, $to, $weight) = @_;
+            my @from = map { hex $_ } $from =~ /([0-9a-f]{2})/gi;
+            my @to = map { hex $_ } $to =~ /([0-9a-f]{2})/gi;
+            return sprintf "#%02x%02x%02x", map {
+                int($from[$_] * (1 - $weight) + $to[$_] * $weight + 0.5)
+            } 0..2;
+        }
+
+        my $bg = $terminal{background} // $fzf{bg};
+        my $fg = $terminal{foreground} // $fzf{fg};
+        my $accent = $ansi{4} // $fzf{header};
+        my $added = $ansi{2} // ($mode eq "light" ? "#116329" : "#3fb950");
+        my $removed = $ansi{1} // $fzf{hl};
+        my $muted = mix($bg, $fg, 0.70);
+        my $added_sign = mix($added, $fg, 0.30);
+        my $removed_sign = mix($removed, $fg, 0.30);
+
+        my @settings = (
+            label => $label, base => "github-$mode-default",
+            background => $bg, panel => $bg, panelAlt => mix($bg, $fg, 0.08),
+            border => $fzf{border}, text => $fg, muted => $muted,
+            accent => $accent, accentMuted => mix($bg, $accent, 0.16),
+            contextBg => $bg, contextContentBg => $bg,
+            lineNumberBg => $bg, lineNumberFg => $muted,
+            selectedHunk => mix($bg, $fzf{"bg+"}, 0.55),
+            addedBg => mix($bg, $added, 0.15), addedContentBg => mix($bg, $added, 0.28),
+            addedSignColor => $added_sign, badgeAdded => $added_sign,
+            removedBg => mix($bg, $removed, 0.15), removedContentBg => mix($bg, $removed, 0.28),
+            removedSignColor => $removed_sign, badgeRemoved => $removed_sign,
+        );
+        print "[themes.$id]\n";
+        while (@settings) {
+            my ($key, $value) = splice @settings, 0, 2;
+            print qq($key = "$value"\n);
+        }
+
+        my @syntax = (
+            comment => $muted,
+            "entity.name.tag" => mix($ansi{6} // $fzf{marker}, $fg, 0.25),
+            keyword => mix($accent, $fg, 0.25),
+            string => mix($added, $fg, 0.25),
+            "constant.numeric" => mix($ansi{3} // $fzf{spinner}, $fg, 0.25),
+            "constant.language" => mix($ansi{5} // $fzf{spinner}, $fg, 0.25),
+        );
+        print "\n[themes.$id.syntax_scopes]\n";
+        while (@syntax) {
+            my ($scope, $value) = splice @syntax, 0, 2;
+            print qq("$scope" = "$value"\n);
+        }
+    ' "$1" "${GHOSTTY_THEME:-One Half Dark}" "$NVIM_BG" "$FZF" "$palette"
+}
+
 update_hunk_theme() {
-    local hunk_theme theme_definition=""
+    local hunk_theme="dotfiles-$1" theme_definition
     case "$1" in
-        nord|catppuccin-*|solarized-light) hunk_theme="$1" ;;
-        tokyonight-night|tokyonight-moon) hunk_theme="tokyo-night" ;;
-        material-oceanic) hunk_theme="material-theme-ocean" ;;
-        one-half-dark) hunk_theme="one-dark-pro" ;;
-        roseprime) hunk_theme="rose-pine" ;;
-        moon) hunk_theme="rose-pine-moon" ;;
-        gruvbox) hunk_theme="gruvbox-dark-medium" ;;
-        wave|dragon|lotus) hunk_theme="kanagawa-$1" ;;
+        modus-operandi-tinted)
+            # Match the Codex pane's warm background and use the Modus diff colors.
+            theme_definition="$(cat <<'EOF'
+[themes.dotfiles-modus-operandi-tinted]
+label = "Modus Operandi Tinted"
+base = "github-light-default"
+background = "#f4f0eb"
+panel = "#f4f0eb"
+panelAlt = "#efe9dd"
+border = "#9f9690"
+text = "#000000"
+muted = "#595959"
+accent = "#0031a9"
+accentMuted = "#dfd5cf"
+contextBg = "#f4f0eb"
+contextContentBg = "#f4f0eb"
+lineNumberBg = "#f4f0eb"
+lineNumberFg = "#595959"
+selectedHunk = "#c2bcb5"
+addedBg = "#c3ebc1"
+addedContentBg = "#acd6a5"
+addedSignColor = "#005000"
+badgeAdded = "#005000"
+removedBg = "#f4d0cf"
+removedContentBg = "#f3b5a7"
+removedSignColor = "#8f1313"
+badgeRemoved = "#8f1313"
+
+[themes.dotfiles-modus-operandi-tinted.syntax_scopes]
+"comment" = "#595959"
+"entity.name.tag" = "#721045"
+"keyword" = "#0031a9"
+"string" = "#005e8b"
+"constant.numeric" = "#6f5500"
+"constant.language" = "#531ab6"
+EOF
+)"
+            ;;
         iceberg)
-            hunk_theme="dotfiles-iceberg"
             # Iceberg syntax colors with surfaces matched to the Codex pane.
             theme_definition="$(cat <<'EOF'
 [themes.dotfiles-iceberg]
@@ -577,7 +689,7 @@ badgeRemoved = "#e27878"
 EOF
 )"
             ;;
-        *) hunk_theme="github-$NVIM_BG-default" ;;
+        *) theme_definition=$(generate_hunk_palette "$hunk_theme") || return ;;
     esac
 
     if [[ ! -f "$HUNK_CONF" ]]; then
@@ -608,7 +720,7 @@ EOF
 
 update_rex_theme() {
     local name="${GHOSTTY_THEME:-One Half Dark}"
-    local error selection_error theme_dir
+    local error selection_error palette
     local -a rex_do=(rex --autostart=false --timeout 5s do)
 
     if ! command -v rex >/dev/null 2>&1; then
@@ -623,17 +735,14 @@ update_rex_theme() {
 
     # Import only when Rex cannot select the palette by name.
     if ! selection_error=$("${rex_do[@]}" client.theme.change "name=$name" 2>&1); then
-        for theme_dir in "${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/themes" \
-            "/Applications/Ghostty.app/Contents/Resources/ghostty/themes"; do
-            if [[ -f "$theme_dir/$name" ]]; then
-                if ! error=$("${rex_do[@]}" client.theme.import "path=$theme_dir/$name" 2>&1); then
-                    printf 'Rex theme import failed: %s\n' "$error" >&2
-                    return
-                fi
-                echo "Imported Rex theme: $name"
+        if palette=$(ghostty_palette_path "$name"); then
+            if ! error=$("${rex_do[@]}" client.theme.import "path=$palette" 2>&1); then
+                printf 'Rex theme import failed: %s\n' "$error" >&2
                 return
             fi
-        done
+            echo "Imported Rex theme: $name"
+            return
+        fi
         printf 'Rex theme skipped: no Ghostty palette file for %s (%s)\n' "$name" "$selection_error" >&2
         return
     fi
